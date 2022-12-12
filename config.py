@@ -1,0 +1,43 @@
+
+config = {
+
+    # network settings
+    'nb_conv_blocks': 2,
+    'conv_block_type': 'normal',
+    'nb_filters': 64,
+    'filter_width': 3,
+    'nb_units_lstm': 128,
+    'nb_layers_lstm': 1,
+    'drop_prob': 0.5,
+    # training settings
+    'epochs': 30,
+    'batch_size': 10,
+    'loss': 'cross_entropy',
+    'weighted': False,
+    'weights_init': 'xavier_uniform',
+    'optimizer': 'adam',
+    'lr': 1e-4,
+    'weight_decay': 1e-6,
+    'shuffling': True,
+    ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
+    'no_lstm': False,
+    'batch_norm': False,
+    'dilation': 1,
+    'pooling': False,
+    'pool_type': 'max',
+    'pool_kernel_width': 2,
+    'reduce_layer': False,
+    'reduce_layer_output': 10,
+    'nb_classes': 7,
+    'seed': 1,
+    'gpu': 'cuda:0',
+    'verbose': False,
+    'print_freq': 10,
+    'save_gradient_plot': False,
+    'print_counts': False,
+    'adj_lr': False,
+    'adj_lr_patience': 5,
+    'early_stopping': False,
+    'es_patience': 5,
+    'save_test_preds': False
+}
