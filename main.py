@@ -41,6 +41,12 @@ def main():
     config['window_size'] = X_train_ss.shape[1]
     config['nb_channels'] = X_train_ss.shape[2]
 
+    #Calling the model
+    
+    net = DeepConvLSTM_Simplified(config=config)
+
+    loss = torch.nn.CrossEntropyLoss()
+    opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
 
 if __name__ == "__main__":
     main()
