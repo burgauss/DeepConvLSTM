@@ -1,10 +1,11 @@
-import torch as nn
-import torch
+from torch import nn
 import warnings
+import torch
 
 warnings.filterwarnings('ignore')
 
 class DeepConvLSTM_Simplified(nn.Module):
+
     def __init__(self, config):
         super(DeepConvLSTM_Simplified, self).__init__()
         # parameters

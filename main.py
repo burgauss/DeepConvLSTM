@@ -6,7 +6,7 @@ from misc.torchutils import seed_torch
 import time
 from dataLoader.DataLoader import DataLoader
 from preprocessing.preprocessing import *
-from model.models import DeepConvLSTM_Simplified
+from model.models import *
 
 # Path
 pathAll = "C:/Users/juan.burgos/Desktop/JuanBurgos/04 Thesis/12_DataCollection/TrainSets/Combination/WeightLog_ALL.csv"
