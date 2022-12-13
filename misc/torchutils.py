@@ -50,7 +50,7 @@ def count_parameters(model):
     print(table)
     print(f"Total Params: {total_learn_params}")
 
-    def seed_worker(worker_id):
-        worker_seed = torch.initial_seed() % 2 ** 32
-        np.random.seed(worker_seed)
-        random.seed(worker_seed)
+def seed_worker(worker_id):
+    worker_seed = torch.initial_seed() % 2 ** 32
+    np.random.seed(worker_seed)
+    random.seed(worker_seed)
