@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split
 
-def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShift=0, tStepRightShift=0, expectedWavesSizes=None):
+def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShift=0, tStepRightShift=0, testSizePerc=0.2):
     """Function determines the size of the windows for the dataset
     param dataset: pd.Dataframe
         the dataset
@@ -14,9 +14,11 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
         the number of data points that to the left of LS1ON that will be taken into account
     param tStepRightShift: int
         the number of data points that to the right of LS1ON that will be taken into account
-    param expectedWaves: int or list
+    param expectedWaves: int or list (NOT USED)
         the number of waves per sequence, i.e., Bottle ColaHalb has 51 waves
-    return: np.array with the X_train, X_test, y_train, y_test"""
+    param testSizePerc : float between 0 and 1
+        the percentage of the complete dataset that will be assign to the test/val dataset
+    returns: np.array with the X_train, X_test, y_train, y_test"""
 
     num_classes = dataset["Bottle"].unique()
     # npDataSet = np.array(dataset["Data"]).reshape((len(dataset), -1))

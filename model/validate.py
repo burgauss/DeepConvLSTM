@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 
-def validation_simplified(modelName, config,  val_features, val_labels, scaler):
+def validation_simplified(modelName, val_features, val_labels, scaler):
     """Function gets a saved model and takes one batch to make predictions just for visualization purposes
     params 
         modelName: String

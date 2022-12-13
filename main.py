@@ -4,9 +4,11 @@ from config import config
 import numpy as np
 from misc.torchutils import seed_torch
 import time
-from dataLoader.DataLoader import DataLoader
+from dataLoader.DataLoader import myDataLoader
 from preprocessing.preprocessing import *
 from model.models import *
+from model.train import *
+from model.validate import *
 
 # Path
 pathAll = "C:/Users/juan.burgos/Desktop/JuanBurgos/04 Thesis/12_DataCollection/TrainSets/Combination/WeightLog_ALL.csv"
@@ -20,10 +22,10 @@ def main():
     log_date = time.strftime('%Y%m%d')
     log_timestamp = time.strftime('%H%M%S')
 
-    dataLoader = DataLoader(pathAll, info=1)
+    dataLoader = myDataLoader(pathAll, True)
     dataset_pd, waveIndexBegin, waveIndexEnding = dataLoader.processData()
     X_train, X_test, y_train, y_test = getWindowedSplitData(dataset_pd, waveIndexBegin, waveIndexEnding, 
-                            tStepLeftShift=0, tStepRightShift=15, expectedWavesSizes=windowSizes)
+                            tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
     X_train_ss, X_test_ss, mm = MinMaxNormalization(X_train, X_test)             # Rescaling
 
     print("X_train shape: ", X_train_ss.shape, "X_test_shape", X_test_ss.shape)
@@ -47,6 +49,22 @@ def main():
 
     loss = torch.nn.CrossEntropyLoss()
     opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
+
+    ## Simplified Train
+    # net = train_simplified(X_train_ss, y_train, X_test_ss, y_test,
+    #    network=net, optimizer=opt, loss=loss, config=config, log_date=log_date,
+    #    log_timestamp=log_timestamp)
+    # torch.save(net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
+
+    ## Simplified train and validate
+    net = train_validate_simplified(X_train_ss, y_train, X_test_ss, y_test,
+       network=net, optimizer=opt, loss=loss, config=config, log_date=log_date,
+       log_timestamp=log_timestamp)
+    torch.save(net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
+
+    # Validation Simplified
+    # modelName = "model20221213081040.pth"
+    # validation_simplified(modelName, X_test_ss, y_test, mm)
 
 if __name__ == "__main__":
     main()
