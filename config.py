@@ -19,6 +19,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
+    'valid_type': 'split', #split    #other 
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'no_lstm': False,
     'batch_norm': False,
@@ -35,10 +36,9 @@ config = {
     'print_freq': 10,
     'save_gradient_plot': False,
     'print_counts': False,
-    'adj_lr': False,
+    'adj_lr': False,    #no change
     'adj_lr_patience': 5,
     'early_stopping': False,
     'es_patience': 5,
-    'save_test_preds': False,
-    'valid_type': 'split' #split    #other 
+    'save_test_preds': False
 }
