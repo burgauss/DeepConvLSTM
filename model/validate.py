@@ -87,7 +87,7 @@ def train_valid_split(x_train_set, y_train_set,
     # Sensor data is segmented using a sliding window mechanism
     X_train = x_train_set
     y_train = y_train_set
-    x_Val = x_valid_set
+    X_val = x_valid_set
     y_val = y_valid_set
 
     # network initialization
@@ -99,16 +99,16 @@ def train_valid_split(x_train_set, y_train_set,
     # optimizer initialization
     loss = custom_loss
 
-    # lr scheduler initialization
-    if args.adj_lr:
-        print('Adjusting learning rate according to scheduler: ' + args.lr_scheduler)
-        scheduler = init_scheduler(opt, args)
-    else:
-        scheduler = None
+    # # lr scheduler initialization
+    # if config['adj_lr']:           
+    #     print('Adjusting learning rate according to scheduler: ' + args.lr_scheduler)
+    #     scheduler = init_scheduler(opt, args)
+    # else:
+    #     scheduler = None
 
     net, checkpoint, val_output, train_output = train(X_train, y_train, X_val, y_val,
-                                                      network=net, optimizer=opt, loss=loss, lr_scheduler=scheduler,
-                                                      config=vars(args), log_dir=log_dir
+                                                      network=net, optimizer=opt, loss=loss, lr_scheduler=None,
+                                                      log_dir=log_dir
                                                       )
 
     if args.save_checkpoints:
