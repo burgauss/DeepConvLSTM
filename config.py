@@ -40,5 +40,5 @@ config = {
     'early_stopping': False,
     'es_patience': 5,
     'save_test_preds': False,
-    'valid_type': 'other' #split
+    'valid_type': 'split' #split    #other 
 }

@@ -60,7 +60,7 @@ def validation_simplified(modelName, val_features, val_labels, scaler):
 
 
 def train_valid_split(x_train_set, y_train_set,
-             x_valid_set, y_valid_set, log_dir, custom_net, custom_loss, custom_opt):
+             x_valid_set, y_valid_set, custom_net, custom_loss, custom_opt, log_dir=None):
     """
     Method to apply normal cross-validation, i.e. one set split into train, validation and testing data.
 
@@ -91,12 +91,8 @@ def train_valid_split(x_train_set, y_train_set,
     y_val = y_valid_set
 
     # network initialization
-    if args.network == 'deepconvlstm':
-        net = DeepConvLSTM(config=vars(args))
-    elif args.network == 'custom':
-        net = custom_net
-    else:
-        print("Did not provide a valid network name!")
+    net = DeepConvLSTM(config=vars(args))
+
 
     # optimizer initialization
     if args.optimizer != 'custom':

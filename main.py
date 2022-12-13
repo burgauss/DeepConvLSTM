@@ -44,11 +44,11 @@ def main():
 
     #Calling the model
     
-    net = DeepConvLSTM_Simplified(config=config)
+    # net = DeepConvLSTM_Simplified(config=config)
     
 
-    loss = torch.nn.CrossEntropyLoss()
-    opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
+    # loss = torch.nn.CrossEntropyLoss()
+    # opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
 
     ## Simplified Train
     # net = train_simplified(X_train_ss, y_train, X_test_ss, y_test,
