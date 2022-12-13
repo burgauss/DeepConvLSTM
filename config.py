@@ -13,7 +13,7 @@ config = {
     'epochs': 30,
     'batch_size': 10,
     'loss': 'cross_entropy',
-    'weighted': False,
+    'weighted': False,          #Always false
     'weights_init': 'xavier_uniform',
     'optimizer': 'adam',
     'lr': 1e-4,
