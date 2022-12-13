@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-class DataLoader():
+class myDataLoader():
     """Class upload the data from a csv file, moreover it determines the indexes of the windows
     at the beggining and at the ending
     params path: string
