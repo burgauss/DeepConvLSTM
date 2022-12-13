@@ -3,6 +3,7 @@ from config import config
 import torch
 from torch.utils.data import DataLoader
 import numpy as np
+from model.train import train
 
 def validation_simplified(modelName, val_features, val_labels, scaler):
     """Function gets a saved model and takes one batch to make predictions just for visualization purposes
@@ -108,8 +109,8 @@ def train_valid_split(x_train_set, y_train_set,
 
     net, checkpoint, val_output, train_output = train(X_train, y_train, X_val, y_val,
                                                       network=net, optimizer=opt, loss=loss, lr_scheduler=None,
-                                                      log_dir=log_dir
-                                                      )
+                                                      log_dir=log_dir)
+                                                      
 
     if args.save_checkpoints:
         print('Saving checkpoint...')

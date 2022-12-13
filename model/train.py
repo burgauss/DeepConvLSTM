@@ -3,10 +3,14 @@ from torch.utils.data import DataLoader
 import numpy as np
 import time
 from sklearn.metrics import precision_score, recall_score, f1_score, jaccard_score
-from misc.torchutils import count_parameters
+from misc.torchutils import count_parameters, seed_worker
 from config import config
 from torch import nn
 from model.models import DeepConvLSTM, ConvBlock, ConvBlockSkip, ConvBlockFixup
+from sklearn.utils.class_weight import compute_class_weight
+import matplotlib.pyplot as plt
+import random
+
 
 
 def init_weights(network):
@@ -315,9 +319,32 @@ def train_validate_simplified(train_features, train_labels, val_features, val_la
 
     return network
 
+def plot_grad_flow(network):
+    """
+    Function which plots the average gradient of a network.
+
+    :param network: pytorch model
+        Network used to obtain gradient
+    """
+    named_parameters = network.named_parameters()
+    ave_grads = []
+    layers = []
+    for n, p in named_parameters:
+        if p.requires_grad and "bias" not in n:
+            layers.append(n)
+            ave_grads.append(p.grad.abs().mean().cpu())
+    plt.plot(ave_grads, alpha=0.3, color="b")
+    plt.hlines(0, 0, len(ave_grads) + 1, linewidth=1, color="k")
+    plt.xticks(range(0, len(ave_grads), 1), layers, rotation="vertical")
+    plt.xlim(xmin=0, xmax=len(ave_grads))
+    plt.xlabel("layers")
+    plt.ylabel("average gradient")
+    plt.title("Gradient flow")
+    plt.grid(True)
 
 
-def train(train_features, train_labels, val_features, val_labels, network, optimizer, loss, config, log_date, log_timestamp, lr_scheduler=None):
+def train(train_features, train_labels, val_features, val_labels, network, optimizer,
+         loss, lr_scheduler=None, log_dir=None):
     """
     Method to train a PyTorch network.
 
@@ -358,27 +385,28 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
 
     # if weighted loss chosen, calculate weights based on training dataset; else each class is weighted equally
     if config['weighted']:
-        class_weights = torch.from_numpy(
-            # 09122022 In train no class 0 exists, so we comment out the next line
-            #compute_class_weight('balanced', classes=np.unique(train_labels + 1), y=train_labels + 1)).float()
-            compute_class_weight('balanced', classes=np.unique(train_labels), y=train_labels)).float()
-        if config['loss'] == 'cross_entropy':
-            loss.weight = class_weights.cuda()
-        print('Applied weighted class weights: ')
-        print(class_weights)
+        # class_weights = torch.from_numpy(
+        #     # 09122022 In train no class 0 exists, so we comment out the next line
+        #     #compute_class_weight('balanced', classes=np.unique(train_labels + 1), y=train_labels + 1)).float()
+        #     compute_class_weight('balanced', classes=np.unique(train_labels), y=train_labels)).float()
+        # if config['loss'] == 'cross_entropy':
+        #     loss.weight = class_weights.cuda()
+        # print('Applied weighted class weights: ')
+        # print(class_weights)
+        pass
     else:
         class_weights = torch.from_numpy(
             # 09122022 In train no class 0 exists, so we comment out the next line
-            #compute_class_weight('balanced', classes=np.unique(train_labels + 1), y=train_labels + 1)).float()
-            compute_class_weight(None, classes=np.unique(train_labels), y=train_labels)).float()
+            compute_class_weight('balanced', classes=np.unique(train_labels + 1), y=train_labels + 1)).float()
+            #compute_class_weight(None, classes=np.unique(train_labels), y=train_labels)).float()
         if config['loss'] == 'cross_entropy':
             loss.weight = class_weights.cuda()
 
     # initialize optimizer and loss
     opt, criterion = optimizer, loss
 
-    if config['loss'] == 'maxup':
-        maxup = Maxup(my_noise_addition_augmenter, ntrials=4)
+    # if config['loss'] == 'maxup':
+    #     maxup = Maxup(my_noise_addition_augmenter, ntrials=4)
 
     # initialize training and validation dataset, define DataLoaders
     dataset = torch.utils.data.TensorDataset(torch.from_numpy(train_features), torch.from_numpy(train_labels))
@@ -422,18 +450,18 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
             # zero accumulated gradients
             opt.zero_grad()
 
-            if config['loss'] == 'maxup':
-                # Increase the inputs via data augmentation
-                inputs, targets = maxup(inputs, targets)
+            # if config['loss'] == 'maxup':
+            #     # Increase the inputs via data augmentation
+            #     inputs, targets = maxup(inputs, targets)
 
             # send inputs through network to get predictions, calculate loss and backpropagate
             train_output = network(inputs)
 
-            if config['loss'] == 'maxup':
-                # calculates loss
-                train_loss = maxup.maxup_loss(train_output, targets.long())[0]
-            else:
-                train_loss = criterion(train_output, targets.long())
+            # if config['loss'] == 'maxup':
+            #     # calculates loss
+            #     train_loss = maxup.maxup_loss(train_output, targets.long())[0]
+            # else:
+            train_loss = criterion(train_output, targets.long())
 
             train_loss.backward()
             opt.step()
@@ -477,17 +505,17 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
                 # send x and y to GPU
                 inputs, targets = x.to(config['gpu']), y.to(config['gpu'])
 
-                if config['loss'] == 'maxup':
-                    # Increase the inputs via data augmentation
-                    inputs, targets = maxup(inputs, targets)
+                # if config['loss'] == 'maxup':
+                #     # Increase the inputs via data augmentation
+                #     inputs, targets = maxup(inputs, targets)
 
                 # send inputs through network to get predictions, loss and calculate softmax probabilities
                 val_output = network(inputs)
-                if config['loss'] == 'maxup':
-                    # calculates loss
-                    val_loss = maxup.maxup_loss(val_output, targets.long())[0]
-                else:
-                    val_loss = criterion(val_output, targets.long())
+                # if config['loss'] == 'maxup':
+                #     # calculates loss
+                #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
+                # else:
+                val_loss = criterion(val_output, targets.long())
 
                 val_output = torch.nn.functional.softmax(val_output, dim=1)
 
