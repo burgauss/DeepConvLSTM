@@ -91,20 +91,13 @@ def train_valid_split(x_train_set, y_train_set,
     y_val = y_valid_set
 
     # network initialization
-    net = DeepConvLSTM(config=vars(args))
-
-
-    # optimizer initialization
-    if args.optimizer != 'custom':
-        opt = init_optimizer(net, args)
-    else:
-        opt = custom_opt
+    net = custom_net
 
     # optimizer initialization
-    if args.loss != 'custom':
-        loss = init_loss(args)
-    else:
-        loss = custom_loss
+    opt = custom_opt
+
+    # optimizer initialization
+    loss = custom_loss
 
     # lr scheduler initialization
     if args.adj_lr:
