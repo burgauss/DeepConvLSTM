@@ -19,7 +19,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'split', #split    #other 
+    'valid_type': 'other', #split    #other 
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'no_lstm': False,
     'batch_norm': False,

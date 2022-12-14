@@ -22,8 +22,8 @@ def main():
     log_timestamp = time.strftime('%H%M%S')
 
     dataLoader = myDataLoader(pathAll, True)
-    dataset_pd, waveIndexBegin, waveIndexEnding = dataLoader.processData()
-    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, waveIndexBegin, waveIndexEnding, 
+    dataset_pd, waveLS1On, waveLS2ON = dataLoader.processData()
+    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, waveLS1On, waveLS2ON, 
                             tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
     X_train_ss, X_valid_ss, mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
 
@@ -73,7 +73,7 @@ def main():
         loss = torch.nn.CrossEntropyLoss()
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
         trained_net = train_validate_simplified(X_train_ss, y_train, X_valid_ss, y_valid,
-        network=net, optimizer=opt, loss=loss, config=config, log_date=log_date,
+        network=net, optimizer=opt, loss=loss, log_date=log_date,
         log_timestamp=log_timestamp)
         torch.save(trained_net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
     
