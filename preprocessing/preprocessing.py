@@ -27,16 +27,17 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
     batchedLabels = []
     windowSize = -tStepLeftShift + tStepRightShift
     assert len(waveIndexBegin) == len(waveIndexEnding), "Lengh of indexes for begin and ending does not match"  #just as a checking
-
+    #wie not use, perhaps in the future     
     for id, (wib, wie) in enumerate(zip(waveIndexBegin, waveIndexEnding)):
         batchedTrainData.append((npDataSet[wib+tStepLeftShift: wib+tStepRightShift, 0]))
         y_temp = npDataSet[wib+tStepLeftShift: wib+tStepRightShift, 1]
-        if len(np.unique(y_temp)) == 1:
+        if len(np.unique(y_temp)) == 1 and windowSize < 50:
         # y_temp.unique() == 1:
             batchedLabels.append(y_temp[0]) 
         else:
-            raise ValueError("Hallochen!! Error")
-        #wie not use, perhaps in the future
+            raise ValueError("Window Size may overlap with not valid data points")
+
+        
     
     
     X = np.array(batchedTrainData)
