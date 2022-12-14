@@ -24,6 +24,9 @@ class myDataLoader():
         """
         processedDataset = self.dataset.copy()
         processedDataset[10] = processedDataset[0].diff()
+        waveLS1ON_1 = processedDataset.index[processedDataset[10]  == 1].to_numpy()
+        waveLS1ON_5 = processedDataset.index[processedDataset[10]  == 5].to_numpy()
+        waveLS1ON = np.sort(np.concatenate((waveLS1ON_1, waveLS1ON_5)))
         waveIndexBegin = processedDataset.index[processedDataset[10] == -1].to_numpy()  
         waveIndexEnding = processedDataset.index[processedDataset[10] == 2].to_numpy()
         # print("Windows start at" + str(waveIndexBegin)) # To print the actual index
@@ -42,4 +45,4 @@ class myDataLoader():
             processedDataset.info()
             print(processedDataset.describe())
 
-        return processedDataset, waveIndexBegin, waveIndexEnding
+        return processedDataset, waveLS1ON, waveIndexEnding
