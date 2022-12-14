@@ -5,12 +5,12 @@ config = {
     'nb_conv_blocks': 2,
     'conv_block_type': 'normal',
     'nb_filters': 64,
-    'filter_width': 3,
+    'filter_width': 5,
     'nb_units_lstm': 128,
     'nb_layers_lstm': 1,
     'drop_prob': 0.5,
     # training settings
-    'epochs': 30,
+    'epochs': 50,
     'batch_size': 10,
     'loss': 'cross_entropy',
     'weighted': False,          #Always false
@@ -19,7 +19,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'other', #split    #other 
+    'valid_type': 'trainValidSimply', #split   #trainValidSimply #other 
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'no_lstm': False,
     'batch_norm': False,
