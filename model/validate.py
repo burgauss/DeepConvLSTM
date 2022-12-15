@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import DataLoader
 import numpy as np
 from sklearn.metrics import precision_score, recall_score, f1_score, jaccard_score
-from model.train import train
+from model.train import train, train_regression
 
 def validation_simplified(modelName, val_features, val_labels, scaler):
     """Function gets a saved model and takes one batch to make predictions just for visualization purposes
@@ -160,25 +160,16 @@ def train_valid_split(x_train_set, y_train_set,
     #     scheduler = init_scheduler(opt, args)
     # else:
     #     scheduler = None
-
-    net, checkpoint, val_output, train_output = train(X_train, y_train, X_val, y_val,
+    if config['DL_mode'] == 'classification':
+        net, checkpoint, val_output, train_output = train(X_train, y_train, X_val, y_val,
                                                       network=net, optimizer=opt, loss=loss, lr_scheduler=None,
                                                       log_dir=log_dir)
-                                                      
+    elif config['DL_mode'] == 'regression':
+        net, checkpoint, val_output, train_output = train_regression(X_train, y_train, X_val, y_val,
+                                                network=net, optimizer=opt, loss=loss, lr_scheduler=None,
+                                                log_dir=log_dir)                             
 
-    # if args.save_checkpoints:
-    #     print('Saving checkpoint...')
-    #     if args.valid_epoch == 'last':
-    #         if args.name:
-    #             c_name = os.path.join(log_dir, "checkpoint_last_{}.pth".format(str(args.name)))
-    #         else:
-    #             c_name = os.path.join(log_dir, "checkpoint_last.pth")
-    #     else:
-    #         if args.name:
-    #             c_name = os.path.join(log_dir, "checkpoint_best_{}.pth".format(str(args.name)))
-    #         else:
-    #             c_name = os.path.join(log_dir, "checkpoint_best.pth")
-    #     torch.save(checkpoint, c_name)
+
 
     labels = list(range(0, config['nb_classes']))
     train_acc = jaccard_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)

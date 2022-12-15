@@ -352,7 +352,7 @@ class DeepConvLSTM_regression(nn.Module):
             - weights_init:         type of weight initialization used
             - seed:                 random seed employed to ensure reproducibility of results
         """
-        super(DeepConvLSTM, self).__init__()
+        super(DeepConvLSTM_regression, self).__init__()
         # parameters
         self.no_lstm = config['no_lstm']
         self.pooling = config['pooling']
@@ -460,9 +460,10 @@ class DeepConvLSTM_regression(nn.Module):
         x = self.dropout(x)
         x = self.fc(x)
         # reshape data and return predicted label of last sample within final sequence (determines label of window)
-        out = x.view(-1, self.final_seq_len, self.nb_classes)
+        #out = x.view(-1, self.final_seq_len, self.nb_classes)
 
-        return out[:, -1, :]
+        # return out[:, -1, :]
+        return x
 
     def number_of_parameters(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
