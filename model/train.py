@@ -797,28 +797,6 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 val_preds = np.concatenate((np.array(val_preds, int), np.array(y_preds, int)))
                 val_gt = np.concatenate((np.array(val_gt, int), np.array(y_true, int)))
 
-            # print epoch evaluation results for train and validation dataset
-            print("EPOCH: {}/{}".format(e + 1, config['epochs']),
-                  "\nTrain Loss: {:.4f}".format(np.mean(train_losses)),
-                  "Train Acc (M): {:.4f}".format(jaccard_score(train_gt, train_preds, average='macro', labels=labels)),
-                  "Train Prc (M): {:.4f}".format(precision_score(train_gt, train_preds, average='macro', labels=labels)),
-                  "Train Rcl (M): {:.4f}".format(recall_score(train_gt, train_preds, average='macro', labels=labels)),
-                  "Train F1 (M): {:.4f}".format(f1_score(train_gt, train_preds, average='macro', labels=labels)),
-                  "Train Acc (W): {:.4f}".format(jaccard_score(train_gt, train_preds, average='weighted', labels=labels)),
-                  "Train Prc (W): {:.4f}".format(precision_score(train_gt, train_preds, average='weighted', labels=labels)),
-                  "Train Rcl (W): {:.4f}".format(recall_score(train_gt, train_preds, average='weighted', labels=labels)),
-                  "Train F1 (W): {:.4f}".format(f1_score(train_gt, train_preds, average='weighted', labels=labels)),
-                  "\nValid Loss: {:.4f}".format(np.mean(val_losses)),
-                  "Valid Acc (M): {:.4f}".format(jaccard_score(val_gt, val_preds, average='macro', labels=labels)),
-                  "Valid Prc (M): {:.4f}".format(precision_score(val_gt, val_preds, average='macro', labels=labels)),
-                  "Valid Rcl (M): {:.4f}".format(recall_score(val_gt, val_preds, average='macro', labels=labels)),
-                  "Valid F1 (M): {:.4f}".format(f1_score(val_gt, val_preds, average='macro', labels=labels)),
-                  "Valid Acc (W): {:.4f}".format(jaccard_score(val_gt, val_preds, average='weighted', labels=labels)),
-                  "Valid Prc (W): {:.4f}".format(precision_score(val_gt, val_preds, average='weighted', labels=labels)),
-                  "Valid Rcl (W): {:.4f}".format(recall_score(val_gt, val_preds, average='weighted', labels=labels)),
-                  "Valid F1 (W): {:.4f}".format(f1_score(val_gt, val_preds, average='weighted', labels=labels))
-                  )
-
             # if chosen, print the value counts of the predicted labels for train and validation dataset
             if config['print_counts']:
                 y_train = np.bincount(train_preds)

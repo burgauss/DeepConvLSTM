@@ -263,6 +263,7 @@ class DeepConvLSTM(nn.Module):
                 self.pool = nn.AvgPool2d((self.pool_kernel_width, 1))
         if self.reduce_layer:
             self.reduce = nn.Conv2d(self.nb_filters, self.reduce_layer_output, (self.filter_width, 1))
+
         self.final_seq_len = self.window_size - (self.filter_width - 1) * (self.nb_conv_blocks * 2)
         # define lstm layers
         if not self.no_lstm:
@@ -363,7 +364,7 @@ class DeepConvLSTM_regression(nn.Module):
         self.window_size = config['window_size']
         self.drop_prob = config['drop_prob']
         self.nb_channels = config['nb_channels']
-        self.nb_classes = config['nb_classes']
+        self.nb_classes = 1
         self.weights_init = config['weights_init']
         self.seed = config['seed']
         # convolution settings
@@ -460,10 +461,10 @@ class DeepConvLSTM_regression(nn.Module):
         x = self.dropout(x)
         x = self.fc(x)
         # reshape data and return predicted label of last sample within final sequence (determines label of window)
-        #out = x.view(-1, self.final_seq_len, self.nb_classes)
+        out = x.view(-1, self.final_seq_len, self.nb_classes)
 
-        # return out[:, -1, :]
-        return x
+        return out[:, -1, :]
+        #return x
 
     def number_of_parameters(self):
         return sum(p.numel() for p in self.parameters() if p.requires_grad)

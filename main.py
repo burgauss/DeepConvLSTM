@@ -97,8 +97,8 @@ def main_regression():
     
     print("X_train new shape: ", X_train_ss.shape, "y_train shape", y_train.shape)
     # Converting data for GPU compatibality
-    X_train_ss, y_train = X_train_ss.astype(np.float32), y_train.astype(np.uint8)
-    X_valid_ss, y_valid = X_valid_ss.astype(np.float32), y_valid.astype(np.uint8)
+    X_train_ss, y_train_ss = X_train_ss.astype(np.float32), y_train_ss.astype(np.float32)
+    X_valid_ss, y_valid_ss = X_valid_ss.astype(np.float32), y_valid_ss.astype(np.float32)
 
     #Adding two new parameters according to the shape of the datasets
     config['window_size'] = X_train_ss.shape[1]
