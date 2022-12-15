@@ -1,5 +1,8 @@
 import os
 import errno
+import sys
+sys.path.append('C:/Users/juan.burgos/source/MasterArbeitSW/DeepConvLSTM/DeepConvLSTM/')
+from misc.logging import Logger
 
 def main():
     path = "testScripts"
@@ -10,7 +13,9 @@ def main():
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
-
+    
+    #without a name
+    sys.stdout = Logger(os.path.join(newDir, 'log.txt'))
     
 
 if __name__ == "__main__":
