@@ -21,6 +21,8 @@ def main():
     log_date = time.strftime('%Y%m%d')
     log_timestamp = time.strftime('%H%M%S')
 
+    #Implementing the Logger
+
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
