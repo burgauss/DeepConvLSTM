@@ -19,7 +19,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'trainValidSimply', #split   #trainValidSimply #other 
+    'valid_type': 'logoutInputBatched', #split   #trainValidSimply #other 
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'no_lstm': False,
     'batch_norm': False,

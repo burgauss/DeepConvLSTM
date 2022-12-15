@@ -4,7 +4,7 @@ from config import config
 import numpy as np
 import os
 import sys
-from misc.logging import Logger
+from misc.logging import Logger, logXtrainYtrain
 from misc.osutils import mkdir_if_missing
 from misc.torchutils import seed_torch
 import time
@@ -25,16 +25,11 @@ def main():
     log_date = time.strftime('%Y%m%d')
     log_timestamp = time.strftime('%H%M%S')
 
-    #Implementing the Logger
-    # log_dir = os.path.join('logs', log_date, log_timestamp)
-    # mkdir_if_missing(log_dir)
-    # sys.stdout = Logger(os.path.join(log_dir, 'log.txt'))
-    # sys.stdout.write("Que Pedo")
 
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=40, testSizePerc=0.15)
+                            tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.15)
     X_train_ss, X_valid_ss, mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
 
     print("X_train shape: ", X_train_ss.shape, "X_test_shape", X_valid_ss.shape)
@@ -82,6 +77,11 @@ def main():
         #Validation Simplified
         modelName = "modelSimply20221214161110.pth"
         validation_simplified(modelName, X_valid_ss, y_valid, mm)
+    elif config['valid_type'] == "logoutInputBatched":
+        #Implementing the Logger
+        log_dir = os.path.join('logs', log_date, log_timestamp)
+        mkdir_if_missing(log_dir)
+        logXtrainYtrain(log_dir, X_train, y_train)  	#Log one sample for thesis purposes
 
 if __name__ == "__main__":
     main()
