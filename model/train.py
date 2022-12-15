@@ -394,6 +394,7 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
         # print('Applied weighted class weights: ')
         # print(class_weights)
         pass
+    
     else:
         class_weights = torch.from_numpy(
             # 09122022 In train no class 0 exists, so we comment out the next line
@@ -462,6 +463,274 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
             #     train_loss = maxup.maxup_loss(train_output, targets.long())[0]
             # else:
             train_loss = criterion(train_output, targets.long())
+
+            train_loss.backward()
+            opt.step()
+            # append train loss to list
+            train_losses.append(train_loss.item())
+
+            # create predictions and append them to final list
+            y_preds = np.argmax(train_output.cpu().detach().numpy(), axis=-1)
+            y_true = targets.cpu().numpy().flatten()
+            train_preds = np.concatenate((np.array(train_preds, int), np.array(y_preds, int)))
+            train_gt = np.concatenate((np.array(train_gt, int), np.array(y_true, int)))
+
+            # if verbose print out batch wise results (batch number, loss and time)
+            if config['verbose']:
+                if batch_num % config['print_freq'] == 0 and batch_num > 0:
+                    cur_loss = np.mean(train_losses)
+                    elapsed = time.time() - start_time
+                    print('| epoch {:3d} | {:5d} batches | ms/batch {:5.2f} | '
+                          'train loss {:5.2f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
+                    start_time = time.time()
+                batch_num += 1
+
+            # plot gradient flow if wanted
+            if config['save_gradient_plot']:
+                plot_grad_flow(network)
+
+        """
+        VALIDATION
+        """
+
+        # helper objects
+        val_preds = []
+        val_gt = []
+        val_losses = []
+
+        # set network to eval mode
+        network.eval()
+        with torch.no_grad():
+            # iterate over validation dataset
+            for i, (x, y) in enumerate(valloader):
+                # send x and y to GPU
+                inputs, targets = x.to(config['gpu']), y.to(config['gpu'])
+
+                # if config['loss'] == 'maxup':
+                #     # Increase the inputs via data augmentation
+                #     inputs, targets = maxup(inputs, targets)
+
+                # send inputs through network to get predictions, loss and calculate softmax probabilities
+                val_output = network(inputs)
+                # if config['loss'] == 'maxup':
+                #     # calculates loss
+                #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
+                # else:
+                val_loss = criterion(val_output, targets.long())
+
+                val_output = torch.nn.functional.softmax(val_output, dim=1)
+
+                # append validation loss to list
+                val_losses.append(val_loss.item())
+
+                # create predictions and append them to final list
+                y_preds = np.argmax(val_output.cpu().numpy(), axis=-1)
+                y_true = targets.cpu().numpy().flatten()
+                val_preds = np.concatenate((np.array(val_preds, int), np.array(y_preds, int)))
+                val_gt = np.concatenate((np.array(val_gt, int), np.array(y_true, int)))
+
+            # print epoch evaluation results for train and validation dataset
+            print("EPOCH: {}/{}".format(e + 1, config['epochs']),
+                  "\nTrain Loss: {:.4f}".format(np.mean(train_losses)),
+                  "Train Acc (M): {:.4f}".format(jaccard_score(train_gt, train_preds, average='macro', labels=labels)),
+                  "Train Prc (M): {:.4f}".format(precision_score(train_gt, train_preds, average='macro', labels=labels)),
+                  "Train Rcl (M): {:.4f}".format(recall_score(train_gt, train_preds, average='macro', labels=labels)),
+                  "Train F1 (M): {:.4f}".format(f1_score(train_gt, train_preds, average='macro', labels=labels)),
+                  "Train Acc (W): {:.4f}".format(jaccard_score(train_gt, train_preds, average='weighted', labels=labels)),
+                  "Train Prc (W): {:.4f}".format(precision_score(train_gt, train_preds, average='weighted', labels=labels)),
+                  "Train Rcl (W): {:.4f}".format(recall_score(train_gt, train_preds, average='weighted', labels=labels)),
+                  "Train F1 (W): {:.4f}".format(f1_score(train_gt, train_preds, average='weighted', labels=labels)),
+                  "\nValid Loss: {:.4f}".format(np.mean(val_losses)),
+                  "Valid Acc (M): {:.4f}".format(jaccard_score(val_gt, val_preds, average='macro', labels=labels)),
+                  "Valid Prc (M): {:.4f}".format(precision_score(val_gt, val_preds, average='macro', labels=labels)),
+                  "Valid Rcl (M): {:.4f}".format(recall_score(val_gt, val_preds, average='macro', labels=labels)),
+                  "Valid F1 (M): {:.4f}".format(f1_score(val_gt, val_preds, average='macro', labels=labels)),
+                  "Valid Acc (W): {:.4f}".format(jaccard_score(val_gt, val_preds, average='weighted', labels=labels)),
+                  "Valid Prc (W): {:.4f}".format(precision_score(val_gt, val_preds, average='weighted', labels=labels)),
+                  "Valid Rcl (W): {:.4f}".format(recall_score(val_gt, val_preds, average='weighted', labels=labels)),
+                  "Valid F1 (W): {:.4f}".format(f1_score(val_gt, val_preds, average='weighted', labels=labels))
+                  )
+
+            # if chosen, print the value counts of the predicted labels for train and validation dataset
+            if config['print_counts']:
+                y_train = np.bincount(train_preds)
+                ii_train = np.nonzero(y_train)[0]
+                y_val = np.bincount(val_preds)
+                ii_val = np.nonzero(y_val)[0]
+                print('Predicted Train Labels: ')
+                print(np.vstack((ii_train, y_train[ii_train])).T)
+                print('Predicted Val Labels: ')
+                print(np.vstack((ii_val, y_val[ii_val])).T)
+
+        # adjust learning rate if enabled
+        if config['adj_lr']:
+            if config['lr_scheduler'] == 'reduce_lr_on_plateau':
+                lr_scheduler.step(np.mean(val_losses))
+            else:
+                lr_scheduler.step()
+
+        # employ early stopping if employed
+        metric = f1_score(val_gt, val_preds, average='macro')
+        if best_metric >= metric:
+            if config['early_stopping']:
+                es_pt_counter += 1
+                # early stopping check
+                if es_pt_counter >= config['es_patience']:
+                    print('Stopping training early since no loss improvement over {} epochs.'
+                          .format(str(es_pt_counter)))
+                    early_stop = True
+                    # print results of best epoch
+                    print('Final (best) results: ')
+                    print("Train Loss: {:.4f}".format(np.mean(best_train_losses)),
+                          "Train Acc: {:.4f}".format(jaccard_score(train_gt, best_train_preds, average='macro', labels=labels)),
+                          "Train Prec: {:.4f}".format(precision_score(train_gt, best_train_preds, average='macro', labels=labels)),
+                          "Train Rcll: {:.4f}".format(recall_score(train_gt, best_train_preds, average='macro', labels=labels)),
+                          "Train F1: {:.4f}".format(f1_score(train_gt, best_train_preds, average='macro', labels=labels)),
+                          "Val Loss: {:.4f}".format(np.mean(best_val_losses)),
+                          "Val Acc: {:.4f}".format(jaccard_score(val_gt, best_val_preds, average='macro', labels=labels)),
+                          "Val Prec: {:.4f}".format(precision_score(val_gt, best_val_preds, average='macro', labels=labels)),
+                          "Val Rcll: {:.4f}".format(recall_score(val_gt, best_val_preds, average='macro', labels=labels)),
+                          "Val F1: {:.4f}".format(f1_score(val_gt, best_val_preds, average='macro', labels=labels)))
+        else:
+            print(f"Performance improved... ({best_metric}->{metric})")
+            if config['early_stopping']:
+                es_pt_counter = 0
+                best_train_losses = train_losses
+                best_val_losses = val_losses
+            best_metric = metric
+            best_network = network
+            checkpoint = {
+                "model_state_dict": network.state_dict(),
+                "optim_state_dict": optimizer.state_dict(),
+                "criterion_state_dict": criterion.state_dict(),
+                "random_rnd_state": random.getstate(),
+                "numpy_rnd_state": np.random.get_state(),
+                "torch_rnd_state": torch.get_rng_state(),
+            }
+            best_train_preds = train_preds
+            best_val_preds = val_preds
+
+        # set network to train mode again
+        network.train()
+
+        if early_stop:
+            break
+
+    # if plot_gradient gradient plot is shown at end of training
+    if config['save_gradient_plot']:
+        if config['name']:
+            plt.savefig(os.path.join(log_dir, 'grad_flow_{}.png'.format(config['name'])))
+        else:
+            plt.savefig(os.path.join(log_dir, 'grad_flow.png'))
+
+    # return validation, train and test predictions as numpy array with ground truth
+    if config['valid_epoch'] == 'best':
+        return best_network, checkpoint, np.vstack((best_val_preds, val_gt)).T, \
+               np.vstack((best_train_preds, train_gt)).T
+    else:
+        checkpoint = {
+            "model_state_dict": network.state_dict(),
+            "optim_state_dict": optimizer.state_dict(),
+            "criterion_state_dict": criterion.state_dict(),
+            "random_rnd_state": random.getstate(),
+            "numpy_rnd_state": np.random.get_state(),
+            "torch_rnd_state": torch.get_rng_state(),
+        }
+        return network, checkpoint, np.vstack((val_preds, val_gt)).T, np.vstack((train_preds, train_gt)).T
+
+
+def train_regression(train_features, train_labels, val_features, val_labels, network, optimizer,
+         loss, lr_scheduler=None, log_dir=None):
+    """
+    Method to train a PyTorch network.
+
+    :param train_features: numpy array
+        Training features
+    :param train_labels: numpy array
+        Training labels
+    :param val_features: numpy array
+        Validation features
+    :param val_labels: numpy array
+        Validation labels
+    :param network: pytorch model
+        DeepConvLSTM network object
+    :param optimizer: optimizer object
+        Optimizer object
+    :param loss: loss object
+        Loss object
+    :param config: dict
+        Config file which contains all training and hyperparameter settings
+    :param log_date: string
+        Date used for logging
+    :param log_timestamp: string
+        Timestamp used for logging
+    :param lr_scheduler: scheduler object, default: None
+        Learning rate scheduler object
+    :return pytorch model, numpy array, numpy array
+        Trained network and training and validation predictions with ground truth
+    """
+
+    # prints the number of learnable parameters in the network
+    count_parameters(network)
+
+    # init network using weight initialization of choice
+    network = init_weights(network)
+    # send network to GPU
+    network.to(config['gpu'])
+    network.train()
+
+
+    # initialize optimizer and loss
+    opt, criterion = optimizer, loss
+
+    # if config['loss'] == 'maxup':
+    #     maxup = Maxup(my_noise_addition_augmenter, ntrials=4)
+
+    # initialize training and validation dataset, define DataLoaders
+    dataset = torch.utils.data.TensorDataset(torch.from_numpy(train_features), torch.from_numpy(train_labels))
+
+    g = torch.Generator()
+    g.manual_seed(config['seed'])
+
+    trainloader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=config['shuffling'],
+                             worker_init_fn=seed_worker, generator=g, pin_memory=True)
+    dataset = torch.utils.data.TensorDataset(torch.from_numpy(val_features), torch.from_numpy(val_labels))
+    valloader = DataLoader(dataset, batch_size=config['batch_size'], shuffle=False,
+                           worker_init_fn=seed_worker, generator=g, pin_memory=True)
+
+    # counters and objects used for early stopping and learning rate adjustment
+    best_metric = 0.0
+    best_network = None
+    best_val_losses = None
+    best_train_losses = None
+    best_val_preds = None
+    best_train_preds = None
+    early_stop = False
+    es_pt_counter = 0
+    labels = list(range(0, config['nb_classes']))
+
+    # training loop; iterates through epochs
+    for e in range(config['epochs']):
+        """
+        TRAINING
+        """
+        # helper objects
+        train_preds = []
+        train_gt = []
+        train_losses = []
+        start_time = time.time()
+        batch_num = 1
+
+        # iterate over train dataset
+        for i, (x, y) in enumerate(trainloader):
+            # send x and y to GPU
+            inputs, targets = x.to(config['gpu']), y.to(config['gpu'])
+            # zero accumulated gradients
+            opt.zero_grad()
+
+            train_output = network(inputs)
+ 
+            train_loss = criterion(train_output, targets)
 
             train_loss.backward()
             opt.step()

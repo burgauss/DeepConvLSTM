@@ -19,7 +19,8 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'validNotSimply', #split   #trainValidSimply #other 
+    'valid_type': 'split', #split   #trainValidSimply #other
+    'DL_mode': 'classification', # 'regression, 'classification'
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'valid_epoch':'best',
     'no_lstm': False,
