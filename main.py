@@ -2,6 +2,10 @@ import torch as nn
 import torch
 from config import config
 import numpy as np
+import os
+import sys
+from misc.logging import Logger
+from misc.osutils import mkdir_if_missing
 from misc.torchutils import seed_torch
 import time
 from dataLoader.DataLoader import myDataLoader
@@ -22,6 +26,10 @@ def main():
     log_timestamp = time.strftime('%H%M%S')
 
     #Implementing the Logger
+    log_dir = os.path.join('logs', log_date, log_timestamp)
+    mkdir_if_missing(log_dir)
+    sys.stdout = Logger(os.path.join(log_dir, 'log.txt'))
+
 
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
@@ -43,14 +51,6 @@ def main():
     #Adding two new parameters according to the shape of the datasets
     config['window_size'] = X_train_ss.shape[1]
     config['nb_channels'] = X_train_ss.shape[2]
-
-    #Calling the model
-    
-    # net = DeepConvLSTM_Simplified(config=config)
-    
-
-    # loss = torch.nn.CrossEntropyLoss()
-    # opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
 
     ## Simplified Train
     # net = train_simplified(X_train_ss, y_train, X_test_ss, y_test,
