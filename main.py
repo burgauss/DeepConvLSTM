@@ -29,7 +29,7 @@ def main():
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.15)
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.15)
     X_train_ss, X_valid_ss, mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
 
     print("X_train shape: ", X_train_ss.shape, "X_test_shape", X_valid_ss.shape)
@@ -79,7 +79,7 @@ def main():
         modelName = "modelSimply20221214161110.pth"
         validation_simplified(modelName, X_valid_ss, y_valid, mm)
     elif config['valid_type'] == 'validNotSimply':
-        modelName = "model20221215112542.pth"
+        modelName = "model20221215114829.pth"
         validation(modelName, X_valid_ss, y_valid, mm)
     elif config['valid_type'] == "logoutInputBatched":
         #Implementing the Logger
