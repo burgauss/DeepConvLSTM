@@ -26,10 +26,10 @@ def main():
     log_timestamp = time.strftime('%H%M%S')
 
     #Implementing the Logger
-    log_dir = os.path.join('logs', log_date, log_timestamp)
-    mkdir_if_missing(log_dir)
-    sys.stdout = Logger(os.path.join(log_dir, 'log.txt'))
-
+    # log_dir = os.path.join('logs', log_date, log_timestamp)
+    # mkdir_if_missing(log_dir)
+    # sys.stdout = Logger(os.path.join(log_dir, 'log.txt'))
+    # sys.stdout.write("Que Pedo")
 
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
