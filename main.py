@@ -16,6 +16,7 @@ from model.validate import *
 
 # Path
 pathAll = "C:/Users/juan.burgos/Desktop/JuanBurgos/04 Thesis/12_DataCollection/TrainSets/Combination/WeightLog_ALL.csv"
+pathAll_regression = "C:/Users/juan.burgos/Desktop/JuanBurgos/04 Thesis/12_DataCollection/TrainSets/Combination/WeightLog_ALL_regression.csv"
 windowSizes = [ 102, 51, 103, 102, 102 , 101, 114]
 
 seed_torch(config['seed'])          # allow random to be seeded for repeatibility
@@ -47,17 +48,6 @@ def main():
     config['window_size'] = X_train_ss.shape[1]
     config['nb_channels'] = X_train_ss.shape[2]
 
-    ## Simplified Train
-    # net = train_simplified(X_train_ss, y_train, X_test_ss, y_test,
-    #    network=net, optimizer=opt, loss=loss, config=config, log_date=log_date,
-    #    log_timestamp=log_timestamp)
-    # torch.save(net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
-
-    ## Simplified train and validate
-    # net = train_validate_simplified(X_train_ss, y_train, X_test_ss, y_test,
-    #    network=net, optimizer=opt, loss=loss, config=config, log_date=log_date,
-    #    log_timestamp=log_timestamp)
-    # torch.save(net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
 
     if config['valid_type'] == "split":
         net = DeepConvLSTM(config=config)
@@ -88,4 +78,7 @@ def main():
         logXtrainYtrain(log_dir, X_train, y_train)  	#Log one sample for thesis purposes
 
 if __name__ == "__main__":
-    main()
+    if config['DL_mode'] == 'classification':
+        main()
+    elif config['DL_mode'] == 'regression':
+        main_regression()
