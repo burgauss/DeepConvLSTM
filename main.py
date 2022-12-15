@@ -65,6 +65,7 @@ def main():
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
         trained_net = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train,
              x_valid_set = X_valid_ss, y_valid_set = y_valid, custom_net=net, custom_loss=loss, custom_opt=opt)
+        torch.save(trained_net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
     elif config['valid_type'] == 'trainValidSimply':
         net = DeepConvLSTM_Simplified(config=config)
         loss = torch.nn.CrossEntropyLoss()
@@ -77,6 +78,9 @@ def main():
         #Validation Simplified
         modelName = "modelSimply20221214161110.pth"
         validation_simplified(modelName, X_valid_ss, y_valid, mm)
+    elif config['valid_type'] == 'validNotSimply':
+        modelName = "model20221215112542.pth"
+        validation(modelName, X_valid_ss, y_valid, mm)
     elif config['valid_type'] == "logoutInputBatched":
         #Implementing the Logger
         log_dir = os.path.join('logs', log_date, log_timestamp)

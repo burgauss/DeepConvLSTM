@@ -21,6 +21,7 @@ config = {
     'shuffling': True,
     'valid_type': 'split', #split   #trainValidSimply #other 
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
+    'valid_epoch':'best',
     'no_lstm': False,
     'batch_norm': False,
     'dilation': 1,
@@ -30,7 +31,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 1,
+    'seed': 1, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,
