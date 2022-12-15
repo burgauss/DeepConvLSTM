@@ -72,7 +72,8 @@ def logXtrainYtrain(logDir, X_train, y_train):
     for i, (x,y) in enumerate(trainLoader):
         XtrainLoader_batch = x
         ytrainLoader_batch = y
-        break
+        if i == 1:
+            break
 
     X_np = XtrainLoader_batch.numpy()
     y_np = ytrainLoader_batch.numpy()
