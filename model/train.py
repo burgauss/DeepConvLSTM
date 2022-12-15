@@ -744,15 +744,14 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
             train_gt = np.concatenate((np.array(train_gt, int), np.array(y_true, int)))
 
             # if verbose print out batch wise results (batch number, loss and time)
-            if config['verbose']:
-                if batch_num % config['print_freq'] == 0 and batch_num > 0:
-                    cur_loss = np.mean(train_losses)
-                    elapsed = time.time() - start_time
-                    print('| epoch {:3d} | {:5d} batches | ms/batch {:5.2f} | '
-                          'train loss {:5.2f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
-                    start_time = time.time()
-                batch_num += 1
-
+            if batch_num % config['print_freq'] == 0 and batch_num > 0:
+                cur_loss = np.mean(train_losses)
+                elapsed = time.time() - start_time
+                print('| epoch {:3d} | {:5d} batches | ms/batch {:5.2f} | '
+                        'train loss {:5.2f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
+                start_time = time.time()
+            batch_num += 1
+            
             # plot gradient flow if wanted
             if config['save_gradient_plot']:
                 plot_grad_flow(network)
@@ -784,9 +783,9 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 #     # calculates loss
                 #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
                 # else:
-                val_loss = criterion(val_output, targets.long())
+                val_loss = criterion(val_output, targets)
 
-                val_output = torch.nn.functional.softmax(val_output, dim=1)
+                # val_output = torch.nn.functional.softmax(val_output, dim=1)
 
                 # append validation loss to list
                 val_losses.append(val_loss.item())

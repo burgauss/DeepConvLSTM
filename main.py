@@ -110,7 +110,10 @@ def main_regression():
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
         trained_net = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train_ss,
              x_valid_set = X_valid_ss, y_valid_set = y_valid_ss, custom_net=net, custom_loss=loss, custom_opt=opt)
-        torch.save(trained_net.state_dict(), './model'+ log_date + log_timestamp +'.pth')
+        torch.save(trained_net.state_dict(), './model_regression'+ log_date + log_timestamp +'.pth')
+    elif config['valid_type'] == 'validNotSimplyRegression':
+        modelName = "model20221215144523.pth"
+        validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
 
 if __name__ == "__main__":
     if config['DL_mode'] == 'classification':

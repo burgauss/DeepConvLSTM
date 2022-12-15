@@ -19,7 +19,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'split', #split   #trainValidSimply #other
+    'valid_type': 'validNotSimplyRegression', #split   #trainValidSimply #other
     'DL_mode': 'regression', # 'regression, 'classification'
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'valid_epoch':'best',
@@ -32,7 +32,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 2, #was seed 1
+    'seed': 4, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,
