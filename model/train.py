@@ -341,6 +341,7 @@ def plot_grad_flow(network):
     plt.ylabel("average gradient")
     plt.title("Gradient flow")
     plt.grid(True)
+    plt.show()
 
 
 def train(train_features, train_labels, val_features, val_labels, network, optimizer,
@@ -506,16 +507,9 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
                 # send x and y to GPU
                 inputs, targets = x.to(config['gpu']), y.to(config['gpu'])
 
-                # if config['loss'] == 'maxup':
-                #     # Increase the inputs via data augmentation
-                #     inputs, targets = maxup(inputs, targets)
-
-                # send inputs through network to get predictions, loss and calculate softmax probabilities
+  
                 val_output = network(inputs)
-                # if config['loss'] == 'maxup':
-                #     # calculates loss
-                #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
-                # else:
+   
                 val_loss = criterion(val_output, targets.long())
 
                 val_output = torch.nn.functional.softmax(val_output, dim=1)
@@ -738,17 +732,17 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
             train_losses.append(train_loss.item())
 
             # create predictions and append them to final list
-            y_preds = np.argmax(train_output.cpu().detach().numpy(), axis=-1)
+            y_preds = train_output.cpu().detach().numpy().flatten()
             y_true = targets.cpu().numpy().flatten()
-            train_preds = np.concatenate((np.array(train_preds, int), np.array(y_preds, int)))
-            train_gt = np.concatenate((np.array(train_gt, int), np.array(y_true, int)))
+            train_preds = np.concatenate((np.array(train_preds, float), np.array(y_preds, float)))
+            train_gt = np.concatenate((np.array(train_gt, float), np.array(y_true, float)))
 
             # if verbose print out batch wise results (batch number, loss and time)
             if batch_num % config['print_freq'] == 0 and batch_num > 0:
                 cur_loss = np.mean(train_losses)
                 elapsed = time.time() - start_time
-                print('| epoch {:3d} | {:5d} batches | ms/batch {:5.2f} | '
-                        'train loss {:5.2f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
+                print('| epoch {:3d} | {:5d} batches | ms/batch {:5.5f} | '
+                        'train loss {:5.5f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
                 start_time = time.time()
             batch_num += 1
             
