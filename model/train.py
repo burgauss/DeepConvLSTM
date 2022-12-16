@@ -8,9 +8,10 @@ from config import config
 from torch import nn
 from model.models import DeepConvLSTM, ConvBlock, ConvBlockSkip, ConvBlockFixup
 from sklearn.utils.class_weight import compute_class_weight
+from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 import random
-
+import os
 
 
 def init_weights(network):
@@ -341,7 +342,7 @@ def plot_grad_flow(network):
     plt.ylabel("average gradient")
     plt.title("Gradient flow")
     plt.grid(True)
-    plt.show()
+    plt.show
 
 
 def train(train_features, train_labels, val_features, val_labels, network, optimizer,
@@ -507,9 +508,16 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
                 # send x and y to GPU
                 inputs, targets = x.to(config['gpu']), y.to(config['gpu'])
 
-  
+                # if config['loss'] == 'maxup':
+                #     # Increase the inputs via data augmentation
+                #     inputs, targets = maxup(inputs, targets)
+
+                # send inputs through network to get predictions, loss and calculate softmax probabilities
                 val_output = network(inputs)
-   
+                # if config['loss'] == 'maxup':
+                #     # calculates loss
+                #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
+                # else:
                 val_loss = criterion(val_output, targets.long())
 
                 val_output = torch.nn.functional.softmax(val_output, dim=1)
@@ -693,7 +701,7 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                            worker_init_fn=seed_worker, generator=g, pin_memory=True)
 
     # counters and objects used for early stopping and learning rate adjustment
-    best_metric = 0.0
+    best_metric = float("inf")
     best_network = None
     best_val_losses = None
     best_train_losses = None
@@ -773,22 +781,16 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
 
                 # send inputs through network to get predictions, loss and calculate softmax probabilities
                 val_output = network(inputs)
-                # if config['loss'] == 'maxup':
-                #     # calculates loss
-                #     val_loss = maxup.maxup_loss(val_output, targets.long())[0]
-                # else:
+
                 val_loss = criterion(val_output, targets)
 
-                # val_output = torch.nn.functional.softmax(val_output, dim=1)
-
-                # append validation loss to list
                 val_losses.append(val_loss.item())
 
                 # create predictions and append them to final list
-                y_preds = np.argmax(val_output.cpu().numpy(), axis=-1)
+                y_preds = val_output.cpu().numpy().flatten()
                 y_true = targets.cpu().numpy().flatten()
-                val_preds = np.concatenate((np.array(val_preds, int), np.array(y_preds, int)))
-                val_gt = np.concatenate((np.array(val_gt, int), np.array(y_true, int)))
+                val_preds = np.concatenate((np.array(val_preds, float), np.array(y_preds, float)))
+                val_gt = np.concatenate((np.array(val_gt, float), np.array(y_true, float)))
 
             # if chosen, print the value counts of the predicted labels for train and validation dataset
             if config['print_counts']:
@@ -809,33 +811,10 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 lr_scheduler.step()
 
         # employ early stopping if employed
-        metric = f1_score(val_gt, val_preds, average='macro')
-        if best_metric >= metric:
-            if config['early_stopping']:
-                es_pt_counter += 1
-                # early stopping check
-                if es_pt_counter >= config['es_patience']:
-                    print('Stopping training early since no loss improvement over {} epochs.'
-                          .format(str(es_pt_counter)))
-                    early_stop = True
-                    # print results of best epoch
-                    print('Final (best) results: ')
-                    print("Train Loss: {:.4f}".format(np.mean(best_train_losses)),
-                          "Train Acc: {:.4f}".format(jaccard_score(train_gt, best_train_preds, average='macro', labels=labels)),
-                          "Train Prec: {:.4f}".format(precision_score(train_gt, best_train_preds, average='macro', labels=labels)),
-                          "Train Rcll: {:.4f}".format(recall_score(train_gt, best_train_preds, average='macro', labels=labels)),
-                          "Train F1: {:.4f}".format(f1_score(train_gt, best_train_preds, average='macro', labels=labels)),
-                          "Val Loss: {:.4f}".format(np.mean(best_val_losses)),
-                          "Val Acc: {:.4f}".format(jaccard_score(val_gt, best_val_preds, average='macro', labels=labels)),
-                          "Val Prec: {:.4f}".format(precision_score(val_gt, best_val_preds, average='macro', labels=labels)),
-                          "Val Rcll: {:.4f}".format(recall_score(val_gt, best_val_preds, average='macro', labels=labels)),
-                          "Val F1: {:.4f}".format(f1_score(val_gt, best_val_preds, average='macro', labels=labels)))
-        else:
-            print(f"Performance improved... ({best_metric}->{metric})")
-            if config['early_stopping']:
-                es_pt_counter = 0
-                best_train_losses = train_losses
-                best_val_losses = val_losses
+        # metric = f1_score(val_gt, val_preds, average='macro')
+        metric = mean_squared_error(y_true, y_preds)
+        if metric < best_metric:
+            print(f"RMSE improved... ({best_metric}->{metric})")
             best_metric = metric
             best_network = network
             checkpoint = {
