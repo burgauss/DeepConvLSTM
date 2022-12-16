@@ -30,7 +30,7 @@ def main():
     dataLoader = myDataLoader(pathAll, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.15)
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.15)
     X_train_ss, X_valid_ss, mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
 
     print("X_train shape: ", X_train_ss.shape, "X_test_shape", X_valid_ss.shape)
@@ -51,6 +51,7 @@ def main():
 
     if config['valid_type'] == "split":
         net = DeepConvLSTM(config=config)
+        print(net)
         loss = torch.nn.CrossEntropyLoss()
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
         trained_net = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train,
@@ -85,7 +86,7 @@ def main_regression():
     dataLoader = myDataLoader(pathAll_regression, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.20)
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.20)
     X_train_ss, X_valid_ss, x_mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
     y_train_ss, y_valid_ss, y_mm = MinMaxNormalization(y_train, y_valid)
  
@@ -112,7 +113,7 @@ def main_regression():
              x_valid_set = X_valid_ss, y_valid_set = y_valid_ss, custom_net=net, custom_loss=loss, custom_opt=opt)
         torch.save(trained_net.state_dict(), './model_regression'+ log_date + log_timestamp +'.pth')
     elif config['valid_type'] == 'validNotSimplyRegression':
-        modelName = "model20221215144523.pth"
+        modelName = "model_regression20221216093827.pth"
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
 
 if __name__ == "__main__":
