@@ -85,7 +85,7 @@ def main_regression():
     dataLoader = myDataLoader(pathAll_regression, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.15)
+                            tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.20)
     X_train_ss, X_valid_ss, x_mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
     y_train_ss, y_valid_ss, y_mm = MinMaxNormalization(y_train, y_valid)
  

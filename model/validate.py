@@ -228,6 +228,36 @@ def train_valid_split(x_train_set, y_train_set,
         net, checkpoint, val_output, train_output = train(X_train, y_train, X_val, y_val,
                                                       network=net, optimizer=opt, loss=loss, lr_scheduler=None,
                                                       log_dir=log_dir)
+        
+        labels = list(range(0, config['nb_classes']))
+        train_acc = jaccard_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
+        train_prec = precision_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
+        train_rcll = recall_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
+        train_f1 = f1_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
+
+        val_acc = jaccard_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
+        val_prec = precision_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
+        val_rcll = recall_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
+        val_f1 = f1_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
+
+        print('VALIDATION RESULTS (macro): ')
+        print("Avg. Accuracy: {0}".format(np.average(val_acc)))
+        print("Avg. Precision: {0}".format(np.average(val_prec)))
+        print("Avg. Recall: {0}".format(np.average(val_rcll)))
+        print("Avg. F1: {0}".format(np.average(val_f1)))
+
+        print("VALIDATION RESULTS (PER CLASS): ")
+        print("Accuracy: {0}".format(val_acc))
+        print("Precision: {0}".format(val_prec))
+        print("Recall: {0}".format(val_rcll))
+        print("F1: {0}".format(val_f1))
+
+        print("GENERALIZATION GAP ANALYSIS: ")
+        print("Train-Val-Accuracy Difference: {0}".format(np.average(train_acc) - np.average(val_acc)))
+        print("Train-Val-Precision Difference: {0}".format(np.average(train_prec) - np.average(val_prec)))
+        print("Train-Val-Recall Difference: {0}".format(np.average(train_rcll) - np.average(val_rcll)))
+        print("Train-Val-F1 Difference: {0}".format(np.average(train_f1) - np.average(val_f1)))
+    
     elif config['DL_mode'] == 'regression':
         net, checkpoint, val_output, train_output = train_regression(X_train, y_train, X_val, y_val,
                                                 network=net, optimizer=opt, loss=loss, lr_scheduler=None,
@@ -235,52 +265,6 @@ def train_valid_split(x_train_set, y_train_set,
 
 
 
-    labels = list(range(0, config['nb_classes']))
-    train_acc = jaccard_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
-    train_prec = precision_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
-    train_rcll = recall_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
-    train_f1 = f1_score(train_output[:, 1], train_output[:, 0], average=None, labels=labels)
 
-    val_acc = jaccard_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
-    val_prec = precision_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
-    val_rcll = recall_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
-    val_f1 = f1_score(val_output[:, 1], val_output[:, 0], average=None, labels=labels)
 
-    print('VALIDATION RESULTS (macro): ')
-    print("Avg. Accuracy: {0}".format(np.average(val_acc)))
-    print("Avg. Precision: {0}".format(np.average(val_prec)))
-    print("Avg. Recall: {0}".format(np.average(val_rcll)))
-    print("Avg. F1: {0}".format(np.average(val_f1)))
-
-    print("VALIDATION RESULTS (PER CLASS): ")
-    print("Accuracy: {0}".format(val_acc))
-    print("Precision: {0}".format(val_prec))
-    print("Recall: {0}".format(val_rcll))
-    print("F1: {0}".format(val_f1))
-
-    print("GENERALIZATION GAP ANALYSIS: ")
-    print("Train-Val-Accuracy Difference: {0}".format(np.average(train_acc) - np.average(val_acc)))
-    print("Train-Val-Precision Difference: {0}".format(np.average(train_prec) - np.average(val_prec)))
-    print("Train-Val-Recall Difference: {0}".format(np.average(train_rcll) - np.average(val_rcll)))
-    print("Train-Val-F1 Difference: {0}".format(np.average(train_f1) - np.average(val_f1)))
-
-    # if args.save_analysis:
-    #     tv_results = pd.DataFrame([val_acc, val_prec, val_rcll, val_f1], columns=args.class_names)
-    #     tv_results.index = ['accuracy', 'precision', 'recall', 'f1']
-    #     tv_gap = pd.DataFrame([train_acc - val_acc, train_prec - val_prec, train_rcll - val_rcll, train_f1 - val_f1],
-    #                           columns=args.class_names)
-    #     tv_gap.index = ['accuracy', 'precision', 'recall', 'f1']
-    #     if args.name:
-    #         tv_results.to_csv(os.path.join(log_dir, 'split_scores_{}.csv'.format(args.name)))
-    #         tv_gap.to_csv(os.path.join(log_dir, 'tv_gap_{}.csv'.format(args.name)))
-    #     else:
-    #         tv_results.to_csv(os.path.join(log_dir, 'split_scores.csv'))
-    #         tv_gap.to_csv(os.path.join(log_dir, 'tv_gap.csv'))
-
-    # evaluate_split_scores(input_cm=val_output,
-    #                       class_names=args.class_names,
-    #                       filepath=log_dir,
-    #                       filename='split',
-    #                       args=args
-    #                       )
     return net
