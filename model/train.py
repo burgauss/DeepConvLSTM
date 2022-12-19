@@ -792,23 +792,6 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 val_preds = np.concatenate((np.array(val_preds, float), np.array(y_preds, float)))
                 val_gt = np.concatenate((np.array(val_gt, float), np.array(y_true, float)))
 
-            # if chosen, print the value counts of the predicted labels for train and validation dataset
-            if config['print_counts']:
-                y_train = np.bincount(train_preds)
-                ii_train = np.nonzero(y_train)[0]
-                y_val = np.bincount(val_preds)
-                ii_val = np.nonzero(y_val)[0]
-                print('Predicted Train Labels: ')
-                print(np.vstack((ii_train, y_train[ii_train])).T)
-                print('Predicted Val Labels: ')
-                print(np.vstack((ii_val, y_val[ii_val])).T)
-
-        # adjust learning rate if enabled
-        if config['adj_lr']:
-            if config['lr_scheduler'] == 'reduce_lr_on_plateau':
-                lr_scheduler.step(np.mean(val_losses))
-            else:
-                lr_scheduler.step()
 
         # employ early stopping if employed
         # metric = f1_score(val_gt, val_preds, average='macro')
