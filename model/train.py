@@ -642,7 +642,7 @@ def train(train_features, train_labels, val_features, val_labels, network, optim
 
 
 def train_regression(train_features, train_labels, val_features, val_labels, network, optimizer,
-         loss, lr_scheduler=None, log_dir=None):
+         loss, lr_scheduler=None, log_dir=None, y_scaler=None):
     """
     Method to train a PyTorch network.
 
@@ -795,10 +795,18 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
 
         # employ early stopping if employed
         # metric = f1_score(val_gt, val_preds, average='macro')
-        metric = mean_squared_error(y_true, y_preds)
-        if metric < best_metric:
-            print(f"RMSE improved... ({best_metric}->{metric})")
-            best_metric = metric
+        metric_scaled = mean_squared_error(val_gt, val_preds)
+        metric_scaled = np.sqrt(metric_scaled)
+        val_gt_un = y_scaler.inverse_transform(val_gt.reshape(-1,1))
+        val_preds_un = y_scaler.inverse_transform(val_preds.reshape(-1,1))
+        # print("Real Values:", val_gt_un)
+        # print("Predicted values: ", val_preds_un)metric_scaled
+        metric_unscaled = mean_squared_error(val_gt_un, val_preds_un)
+        metric_unscaled = np.sqrt(metric_unscaled)
+        print("metric_unscaled", metric_unscaled)
+        if metric_unscaled < best_metric:
+            print(f"RMSE improved... ({best_metric}->{metric_unscaled})")
+            best_metric = metric_unscaled
             best_network = network
             checkpoint = {
                 "model_state_dict": network.state_dict(),

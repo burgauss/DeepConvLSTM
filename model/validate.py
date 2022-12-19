@@ -179,7 +179,7 @@ def validation_regression(modelName, val_features, val_labels, x_scaler, y_scale
     print("true labels: ", y_true_unscaled)
 
 def train_valid_split(x_train_set, y_train_set,
-             x_valid_set, y_valid_set, custom_net, custom_loss, custom_opt, log_dir=None):
+             x_valid_set, y_valid_set, custom_net, custom_loss, custom_opt, log_dir=None, y_scaler=None):
     """
     Method to apply normal cross-validation, i.e. one set split into train, validation and testing data.
 
@@ -261,7 +261,7 @@ def train_valid_split(x_train_set, y_train_set,
     elif config['DL_mode'] == 'regression':
         net, checkpoint, val_output, train_output = train_regression(X_train, y_train, X_val, y_val,
                                                 network=net, optimizer=opt, loss=loss, lr_scheduler=None,
-                                                log_dir=log_dir)                             
+                                                log_dir=log_dir, y_scaler=y_scaler)                             
 
 
 
