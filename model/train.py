@@ -801,8 +801,8 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
         val_preds_un = y_scaler.inverse_transform(val_preds.reshape(-1,1))
         # print("Real Values:", val_gt_un)
         # print("Predicted values: ", val_preds_un)metric_scaled
-        metric_unscaled = mean_squared_error(val_gt_un, val_preds_un)
-        metric_unscaled = np.sqrt(metric_unscaled)
+        metric_unscaled = mean_squared_error(val_gt_un, val_preds_un, squared=False)
+        # metric_unscaled = np.sqrt(metric_unscaled)
         print("metric_unscaled", metric_unscaled)
         if metric_unscaled < best_metric:
             print(f"RMSE improved... ({best_metric}->{metric_unscaled})")

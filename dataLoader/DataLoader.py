@@ -21,6 +21,7 @@ class myDataLoader():
         """ Method process the data according to the definition set in the WeightOfflineCalculation
         Args: None
         Returns: a pd.df with the processed data, an np.array with the index begin, an np array with the index ending
+            also returns the LS1OFF 
         """
         processedDataset = self.dataset.copy()
         processedDataset[10] = processedDataset[0].diff()
