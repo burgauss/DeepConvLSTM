@@ -744,7 +744,7 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
             y_true = targets.cpu().numpy().flatten()
             train_preds = np.concatenate((np.array(train_preds, float), np.array(y_preds, float)))
             train_gt = np.concatenate((np.array(train_gt, float), np.array(y_true, float)))
-            train_pred_un = y_scaler.inverse_transform(train_preds.reshape(-1,1))
+            train_preds_un = y_scaler.inverse_transform(train_preds.reshape(-1,1))
             train_gt_un = y_scaler.inverse_transform(train_gt.reshape(-1,1))
             # if verbose print out batch wise results (batch number, loss and time)
             if batch_num % config['print_freq'] == 0 and batch_num > 0:
@@ -866,8 +866,8 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 "numpy_rnd_state": np.random.get_state(),
                 "torch_rnd_state": torch.get_rng_state(),
             }
-            best_train_preds = train_preds
-            best_val_preds = val_preds
+            best_train_preds = train_preds_un
+            best_val_preds = val_preds_un
             best_fp = fp.flatten().tolist()
             best_fn = fn.flatten().tolist()
             best_precision = rmse.flatten().tolist()
@@ -888,8 +888,8 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
 
     # return validation, train and test predictions as numpy array with ground truth
     if config['valid_epoch'] == 'best':
-        return best_network, checkpoint, np.vstack((best_val_preds, val_gt)).T, \
-               np.vstack((best_train_preds, train_gt)).T, best_fp, best_fn, best_precision, \
+        return best_network, checkpoint, np.vstack((best_val_preds, val_gt_un)).T, \
+               np.vstack((best_train_preds, train_gt_un)).T, best_fp, best_fn, best_precision, \
             best_elementCounter
     else:   
         checkpoint = {
