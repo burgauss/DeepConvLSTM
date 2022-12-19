@@ -85,8 +85,12 @@ def main_regression():
     print(np.__version__)
     dataLoader = myDataLoader(pathAll_regression, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON, indexes_LS1OFF = dataLoader.processData()
-    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.20)
+    #Training for iniital window
+    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+    #                         tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.20)
+    #Training for PIB window
+    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                            tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.20)
     # Observing the distribution of data from y_valid
     value, counts = np.unique(y_valid, return_counts=True)
     print("values: ", value)
