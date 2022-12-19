@@ -32,7 +32,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 4, #was seed 1
+    'seed': 10, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,

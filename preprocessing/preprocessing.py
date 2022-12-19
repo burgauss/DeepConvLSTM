@@ -1,6 +1,7 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.model_selection import train_test_split
+from config import config
 
 def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShift=0, tStepRightShift=0, testSizePerc=0.2):
     """Function determines the size of the windows for the dataset
@@ -44,7 +45,7 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
     # y = np.array(batchedLabels).reshape((len(batchedLabels), 1))
     y = np.array(batchedLabels).reshape((len(batchedLabels), ))
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc, random_state=config['seed'])
 
     return X_train, X_test, y_train, y_test
 

@@ -27,11 +27,11 @@ class myDataLoader():
         waveLS1ON_1 = processedDataset.index[processedDataset[10]  == 1].to_numpy()
         waveLS1ON_5 = processedDataset.index[processedDataset[10]  == 5].to_numpy()
         waveLS1ON = np.sort(np.concatenate((waveLS1ON_1, waveLS1ON_5)))
-        waveIndexBegin = processedDataset.index[processedDataset[10] == -1].to_numpy()  
+        waveLS1OFF = processedDataset.index[processedDataset[10] == -1].to_numpy()  
         waveIndexEnding = processedDataset.index[processedDataset[10] == 2].to_numpy()
         # print("Windows start at" + str(waveIndexBegin)) # To print the actual index
         # print("Windows end at" + str(waveIndexEnding))
-        print("Len of of index for start of Wave " + str(len(waveIndexBegin)))
+        print("Len of of index for start of Wave " + str(len(waveLS1OFF)))
         print("Len of of index for end of Wave " + str(len(waveIndexEnding)))
         ######################################################################
         # Droping the datasets
@@ -45,4 +45,4 @@ class myDataLoader():
             processedDataset.info()
             print(processedDataset.describe())
 
-        return processedDataset, waveLS1ON, waveIndexEnding
+        return processedDataset, waveLS1ON, waveIndexEnding, waveLS1OFF

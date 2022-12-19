@@ -82,11 +82,15 @@ def main_regression():
     log_date = time.strftime('%Y%m%d')
     log_timestamp = time.strftime('%H%M%S')
 
-
+    print(np.__version__)
     dataLoader = myDataLoader(pathAll_regression, True)
-    dataset_pd, indexes_LS1ON, indexes_LS2ON = dataLoader.processData()
+    dataset_pd, indexes_LS1ON, indexes_LS2ON, indexes_LS1OFF = dataLoader.processData()
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
                             tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.20)
+    # Observing the distribution of data from y_valid
+    value, counts = np.unique(y_valid, return_counts=True)
+    print("values: ", value)
+    print("counts: ", counts)
     X_train_ss, X_valid_ss, x_mm = MinMaxNormalization(X_train, X_valid)             # Rescaling
     y_train_ss, y_valid_ss, y_mm = MinMaxNormalization(y_train, y_valid)
  
