@@ -9,8 +9,9 @@ config = {
     'nb_units_lstm': 128,
     'nb_layers_lstm': 1,
     'drop_prob': 0.5,
+    'error_margins': 5,
     # training settings
-    'epochs': 50,
+    'epochs': 10,
     'batch_size': 10,
     'loss': 'cross_entropy',
     'weighted': False,          #Always false
@@ -32,7 +33,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 10, #was seed 1
+    'seed': 11, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,

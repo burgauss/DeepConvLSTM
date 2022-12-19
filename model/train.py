@@ -744,7 +744,8 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
             y_true = targets.cpu().numpy().flatten()
             train_preds = np.concatenate((np.array(train_preds, float), np.array(y_preds, float)))
             train_gt = np.concatenate((np.array(train_gt, float), np.array(y_true, float)))
-
+            train_pred_un = y_scaler.inverse_transform(train_preds.reshape(-1,1))
+            train_gt_un = y_scaler.inverse_transform(train_gt.reshape(-1,1))
             # if verbose print out batch wise results (batch number, loss and time)
             if batch_num % config['print_freq'] == 0 and batch_num > 0:
                 cur_loss = np.mean(train_losses)
@@ -766,7 +767,11 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
         val_preds = []
         val_gt = []
         val_losses = []
-
+        fp = np.zeros((config['nb_classes'],1))  #false positives
+        fn = np.zeros((config['nb_classes'],1)) #false negatives
+        mse = np.zeros((config['nb_classes'],1))
+        precision = np.zeros((config['nb_classes'],1)) # given the margin of error in grams
+        elementCounter = np.zeros((config['nb_classes'],1))
         # set network to eval mode
         network.eval()
         with torch.no_grad():
@@ -802,6 +807,51 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
         # print("Real Values:", val_gt_un)
         # print("Predicted values: ", val_preds_un)metric_scaled
         metric_unscaled = mean_squared_error(val_gt_un, val_preds_un, squared=False)
+
+        #calculating the FPs, FNs and precision with +-5gr
+        for i in range(len(val_gt_un)):
+            y_trueVal = round(val_gt_un[i,0])
+            if y_trueVal == 16:
+                pos = 0
+            elif y_trueVal == 23:
+                pos = 1
+            elif y_trueVal == 38:
+                pos = 2
+            elif y_trueVal == 66:
+                pos = 3
+            elif y_trueVal == 74:
+                pos = 4
+            elif y_trueVal ==303:
+                pos = 5
+            elif y_trueVal == 595:
+                pos = 6
+            else:
+                raise ValueError("y_trueVal did not match the available labels")
+            
+            #check if prediction matches the true value
+            if ((val_preds_un[i,0] > (y_trueVal - config['error_margins'])) and (val_preds_un[i,0] < (y_trueVal + config['error_margins']))):
+                precision[pos,0] = precision[pos,0] + 1
+            elif (val_preds_un[i] > (y_trueVal + config['error_margins'])):
+                fp[pos,0] = fp[pos,0] + 1
+            elif (val_preds_un[i] < (y_trueVal - config['error_margins'])):
+                fn[pos, 0] = fn[pos, 0] + 1
+            #count the mse and increase the counter
+            mse[pos,0] = mse[pos,0] + (val_gt_un[i,0] - val_preds_un[i,0])**2
+            elementCounter[pos,0] = elementCounter[pos,0] + 1 
+
+        precision = precision / elementCounter
+        print("Precision per label/weight")
+        print(precision.T)
+        print("false positives per label/weight")
+        print(fp.T)
+        print("false negatives per label/weight")
+        print(fn.T)
+        print("RMSE per label/weight")
+        rmse = np.sqrt(mse / elementCounter)
+        print(rmse.T)
+        print("Counter")
+        print(elementCounter.T)
+
         # metric_unscaled = np.sqrt(metric_unscaled)
         print("metric_unscaled", metric_unscaled)
         if metric_unscaled < best_metric:
@@ -818,6 +868,10 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
             }
             best_train_preds = train_preds
             best_val_preds = val_preds
+            best_fp = fp.flatten().tolist()
+            best_fn = fn.flatten().tolist()
+            best_precision = rmse.flatten().tolist()
+            best_elementCounter = elementCounter.flatten().tolist()
 
         # set network to train mode again
         network.train()
@@ -835,8 +889,9 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
     # return validation, train and test predictions as numpy array with ground truth
     if config['valid_epoch'] == 'best':
         return best_network, checkpoint, np.vstack((best_val_preds, val_gt)).T, \
-               np.vstack((best_train_preds, train_gt)).T
-    else:
+               np.vstack((best_train_preds, train_gt)).T, best_fp, best_fn, best_precision, \
+            best_elementCounter
+    else:   
         checkpoint = {
             "model_state_dict": network.state_dict(),
             "optim_state_dict": optimizer.state_dict(),

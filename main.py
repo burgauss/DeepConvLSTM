@@ -86,11 +86,11 @@ def main_regression():
     dataLoader = myDataLoader(pathAll_regression, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON, indexes_LS1OFF = dataLoader.processData()
     #Training for iniital window
-    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-    #                         tStepLeftShift=0, tStepRightShift=35, testSizePerc=0.20)
+    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.20)
     #Training for PIB window
-    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
-                            tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.20)
+    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+    #                         tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.20)
     # Observing the distribution of data from y_valid
     value, counts = np.unique(y_valid, return_counts=True)
     print("values: ", value)
@@ -117,11 +117,13 @@ def main_regression():
         net = DeepConvLSTM_regression(config=config)
         loss = torch.nn.MSELoss()
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
-        trained_net = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train_ss,
+        trained_net, checkpoint, val_output, train_output, best_fp, best_fn, best_precision, counter  = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train_ss,
              x_valid_set = X_valid_ss, y_valid_set = y_valid_ss, custom_net=net, custom_loss=loss, custom_opt=opt, y_scaler=y_mm)
+        print("final_valoutput")
+        print(val_output)
         torch.save(trained_net.state_dict(), './model_regression'+ log_date + log_timestamp +'.pth')
     elif config['valid_type'] == 'validNotSimplyRegression':
-        modelName = "model_regression20221216093827.pth"
+        modelName = "model_regression20221219120539.pth"
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
 
 if __name__ == "__main__":

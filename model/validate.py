@@ -259,7 +259,7 @@ def train_valid_split(x_train_set, y_train_set,
         print("Train-Val-F1 Difference: {0}".format(np.average(train_f1) - np.average(val_f1)))
     
     elif config['DL_mode'] == 'regression':
-        net, checkpoint, val_output, train_output = train_regression(X_train, y_train, X_val, y_val,
+        net, checkpoint, val_output, train_output, best_fp, best_fn, best_precision, counter = train_regression(X_train, y_train, X_val, y_val,
                                                 network=net, optimizer=opt, loss=loss, lr_scheduler=None,
                                                 log_dir=log_dir, y_scaler=y_scaler)                             
 
@@ -267,4 +267,4 @@ def train_valid_split(x_train_set, y_train_set,
 
 
 
-    return net
+    return net, checkpoint, val_output, train_output, best_fp, best_fn, best_precision, counter 
