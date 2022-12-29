@@ -87,10 +87,15 @@ def main_regression():
     dataset_pd, indexes_LS1ON, indexes_LS2ON, indexes_LS1OFF = dataLoader.processData()
     #Training for iniital window
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
-                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.20)
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.4)
+
     #Training for PIB window
     # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
-    #                         tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.20)
+    #                         tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.15)
+
+    #Training in Omega1 |- Omega2:=15
+    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+    #                         tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
     # Observing the distribution of data from y_valid
     value, counts = np.unique(y_valid, return_counts=True)
     print("values: ", value)
@@ -123,7 +128,7 @@ def main_regression():
         print(val_output)
         torch.save(trained_net.state_dict(), './model_regression'+ log_date + log_timestamp +'.pth')
     elif config['valid_type'] == 'validNotSimplyRegression':
-        modelName = "model_regression20221219120539.pth"
+        modelName = "model_regression20221228162517.pth"
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
 
 if __name__ == "__main__":

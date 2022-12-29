@@ -1,6 +1,6 @@
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, StratifiedKFold
 from config import config
 
 def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShift=0, tStepRightShift=0, testSizePerc=0.2):
@@ -45,7 +45,13 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
     # y = np.array(batchedLabels).reshape((len(batchedLabels), 1))
     y = np.array(batchedLabels).reshape((len(batchedLabels), ))
     
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc, random_state=config['seed'])
+    # Implementing stratification for all the labels
+    if config['valid_type'] == 'validNotSimplyRegression':
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc,
+         random_state=config['seed'], stratify=np.array([16, 23, 38, 66, 74, 303, 595]))
+    else:
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc, random_state=[config['seed']])
 
     return X_train, X_test, y_train, y_test
 

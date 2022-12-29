@@ -11,7 +11,7 @@ config = {
     'drop_prob': 0.5,
     'error_margins': 5,
     # training settings
-    'epochs': 10,
+    'epochs': 100,
     'batch_size': 10,
     'loss': 'cross_entropy',
     'weighted': False,          #Always false
@@ -20,7 +20,7 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'split', #split   #trainValidSimply #other
+    'valid_type': 'validNotSimplyRegression', #split   #trainValidSimply #other
     'DL_mode': 'regression', # 'regression, 'classification'
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
     'valid_epoch':'best',
@@ -33,7 +33,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 11, #was seed 1
+    'seed': 5, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,
