@@ -47,11 +47,21 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
     
     # Implementing stratification for all the labels
     if config['valid_type'] == 'validNotSimplyRegression':
-
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc,
-         random_state=config['seed'], stratify=np.array([16, 23, 38, 66, 74, 303, 595]))
+        skf = StratifiedKFold(n_splits=2, random_state=config['seed'], shuffle=True)
+        for train, test in skf.split(X,y):
+            #lets take the first one
+            index_train = train
+            index_test = test
+            break
+        X_train = X[index_train]
+        y_train = y[index_train]
+        X_test = X[index_test]
+        y_test = y[index_test]
+        # # print(y_test[10])
+        # # values, counts = np.unique(y_test, return_counts=True)    Helpful in printing
+        # # print(counts)
     else:
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc, random_state=[config['seed']])
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=testSizePerc, random_state=config['seed'])
 
     return X_train, X_test, y_train, y_test
 

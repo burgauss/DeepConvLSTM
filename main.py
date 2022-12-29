@@ -130,6 +130,9 @@ def main_regression():
     elif config['valid_type'] == 'validNotSimplyRegression':
         modelName = "model_regression20221228162517.pth"
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
+    elif config['valid_type'] == 'validComplete':
+        modelName = "model_regression20221228162517.pth"
+        validation_regressionComplete(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
 
 if __name__ == "__main__":
     if config['DL_mode'] == 'classification':
