@@ -85,9 +85,18 @@ def main_regression():
     print(np.__version__)
     dataLoader = myDataLoader(pathAll_regression, True)
     dataset_pd, indexes_LS1ON, indexes_LS2ON, indexes_LS1OFF = dataLoader.processData()
-    #Training for iniital window
+    #change the config to get same scaler
+    if config['valid_type'] == 'validComplete':
+        config['valid_type'] = 'other'      #change it temporally to get the split from where the scaler was obtained
+        X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.15)
+        X_train_ss_, X_valid_ss_, x_mm_ = MinMaxNormalization(X_train, X_valid)             # Rescaling
+        y_train_ss_, y_valid_ss_, y_mm_ = MinMaxNormalization(y_train, y_valid)
+    
+    config['valid_type'] = 'validComplete'  #return to original state
     X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
                             tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.4)
+    
 
     #Training for PIB window
     # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
@@ -97,6 +106,7 @@ def main_regression():
     # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
     #                         tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
     # Observing the distribution of data from y_valid
+
     value, counts = np.unique(y_valid, return_counts=True)
     print("values: ", value)
     print("counts: ", counts)
@@ -117,7 +127,7 @@ def main_regression():
     #Adding two new parameters according to the shape of the datasets
     config['window_size'] = X_train_ss.shape[1]
     config['nb_channels'] = X_train_ss.shape[2]
-
+    config['valid_type'] = 'validComplete'  #return to original state
     if config['valid_type'] == "split":
         net = DeepConvLSTM_regression(config=config)
         loss = torch.nn.MSELoss()
@@ -132,7 +142,7 @@ def main_regression():
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
     elif config['valid_type'] == 'validComplete':
         modelName = "model_regression20221228162517.pth"
-        validation_regressionComplete(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
+        validation_regressionComplete(modelName, X_valid_ss, y_valid_ss, x_mm_, y_mm_)
 
 if __name__ == "__main__":
     if config['DL_mode'] == 'classification':
