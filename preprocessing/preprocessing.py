@@ -46,7 +46,7 @@ def getWindowedSplitData(dataset, waveIndexBegin, waveIndexEnding, tStepLeftShif
     y = np.array(batchedLabels).reshape((len(batchedLabels), ))
     
     # Implementing stratification for all the labels
-    if config['valid_type'] == 'validNotSimplyRegression':
+    if config['valid_type'] == 'validNotSimplyRegression' or config['valid_type'] == 'validComplete':
         skf = StratifiedKFold(n_splits=2, random_state=config['seed'], shuffle=True)
         for train, test in skf.split(X,y):
             #lets take the first one
