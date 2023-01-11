@@ -1,0 +1,1977 @@
+1.23.4
+Len of of index for start of Wave 675
+Len of of index for end of Wave 675
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 283031 entries, 0 to 283031
+Data columns (total 4 columns):
+ #   Column  Non-Null Count   Dtype  
+---  ------  --------------   -----  
+ 0   Satus   283031 non-null  int64  
+ 1   Data    283031 non-null  int64  
+ 2   Bottle  283031 non-null  int64  
+ 3   Diff    283030 non-null  float64
+dtypes: float64(1), int64(3)
+memory usage: 10.8 MB
+               Satus           Data         Bottle           Diff
+count  283031.000000  283031.000000  283031.000000  283030.000000
+mean        1.848501      38.494631     184.036063       0.000000
+std         2.352771     113.645150     214.014944       0.341741
+min         0.000000    -235.000000      16.000000      -4.000000
+25%         0.000000       1.000000      38.000000       0.000000
+50%         0.000000       5.000000      66.000000       0.000000
+75%         4.000000      18.000000     303.000000       0.000000
+max         6.000000    1084.000000     595.000000       5.000000
+values:  [ 16  23  38  66  74 303 595]
+counts:  [ 9 11 22 14 13 12 21]
+X_train shape:  (573, 45) X_test_shape (102, 45)
+y_train shape:  (573, 1) y_test_shape (102, 1)
+X_train new shape:  (573, 45, 1) y_train shape (573,)
+
+CALCULATING TRAIN-VALID-SPLIT SCORES.
+
++----------------------------+------------+
+|          Modules           | Parameters |
++----------------------------+------------+
+| conv_blocks.0.conv1.weight |    320     |
+|  conv_blocks.0.conv1.bias  |     64     |
+| conv_blocks.0.conv2.weight |   20480    |
+|  conv_blocks.0.conv2.bias  |     64     |
+| conv_blocks.1.conv1.weight |   20480    |
+|  conv_blocks.1.conv1.bias  |     64     |
+| conv_blocks.1.conv2.weight |   20480    |
+|  conv_blocks.1.conv2.bias  |     64     |
+| lstm_layers.0.weight_ih_l0 |   32768    |
+| lstm_layers.0.weight_hh_l0 |   65536    |
+|  lstm_layers.0.bias_ih_l0  |    512     |
+|  lstm_layers.0.bias_hh_l0  |    512     |
+|         fc.weight          |    128     |
+|          fc.bias           |     1      |
++----------------------------+------------+
+Total Params: 161473
+| epoch   0 |    10 batches | ms/batch 226.29464 | train loss 0.19877
+| epoch   0 |    20 batches | ms/batch 31.01709 | train loss 0.16280
+| epoch   0 |    30 batches | ms/batch 30.21908 | train loss 0.15271
+| epoch   0 |    40 batches | ms/batch 31.81522 | train loss 0.15098
+| epoch   0 |    50 batches | ms/batch 38.39710 | train loss 0.14458
+Precision per label/weight
+[[0.   0.   0.   0.   0.   0.25 0.  ]]
+false positives per label/weight
+[[ 9. 11. 22. 14. 13.  1.  0.]]
+false negatives per label/weight
+[[ 0.  0.  0.  0.  0.  8. 21.]]
+RMSE per label/weight
+[[170.49324394 189.77187353 180.33448566 149.18721615 155.68293323
+   84.93009691 302.55918578]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 198.24795534579584
+RMSE improved... (inf->198.24795534579584)
+| epoch   1 |    10 batches | ms/batch 28.12479 | train loss 0.09785
+| epoch   1 |    20 batches | ms/batch 32.71246 | train loss 0.10129
+| epoch   1 |    30 batches | ms/batch 26.92795 | train loss 0.09218
+| epoch   1 |    40 batches | ms/batch 25.93069 | train loss 0.09259
+| epoch   1 |    50 batches | ms/batch 31.41606 | train loss 0.08983
+Precision per label/weight
+[[0. 0. 0. 0. 0. 0. 0.]]
+false positives per label/weight
+[[ 9. 11. 22. 14. 13.  2.  0.]]
+false negatives per label/weight
+[[ 0.  0.  0.  0.  0. 10. 21.]]
+RMSE per label/weight
+[[141.85597134 160.61910326 147.72217777 123.7432667  120.36568232
+   77.6004878  253.84963316]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 164.88803778794266
+RMSE improved... (198.24795534579584->164.88803778794266)
+| epoch   2 |    10 batches | ms/batch 36.70189 | train loss 0.07434
+| epoch   2 |    20 batches | ms/batch 40.19248 | train loss 0.06787
+| epoch   2 |    30 batches | ms/batch 40.09259 | train loss 0.06825
+| epoch   2 |    40 batches | ms/batch 37.10093 | train loss 0.06056
+| epoch   2 |    50 batches | ms/batch 33.80954 | train loss 0.05798
+Precision per label/weight
+[[0.         0.         0.04545455 0.07142857 0.07692308 0.
+  0.        ]]
+false positives per label/weight
+[[ 9. 11. 21. 12. 12.  4.  0.]]
+false negatives per label/weight
+[[ 0.  0.  0.  1.  0.  8. 21.]]
+RMSE per label/weight
+[[ 90.01958091  93.32209338  90.26797509  75.68743849  58.68908935
+   90.35209963 170.40186724]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 107.5897223806958
+RMSE improved... (164.88803778794266->107.5897223806958)
+| epoch   3 |    10 batches | ms/batch 37.10077 | train loss 0.03823
+| epoch   3 |    20 batches | ms/batch 40.69126 | train loss 0.03955
+| epoch   3 |    30 batches | ms/batch 48.07134 | train loss 0.03348
+| epoch   3 |    40 batches | ms/batch 46.47584 | train loss 0.03290
+| epoch   3 |    50 batches | ms/batch 41.78822 | train loss 0.03032
+Precision per label/weight
+[[0.         0.         0.09090909 0.         0.07692308 0.16666667
+  0.        ]]
+false positives per label/weight
+[[ 9. 11. 15. 12.  7.  3.  0.]]
+false negatives per label/weight
+[[ 0.  0.  5.  2.  5.  7. 21.]]
+RMSE per label/weight
+[[ 57.16969942  52.46546409  58.89570797  46.48808388  36.88467
+   96.1289137  142.27585082]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 84.01260080415825
+RMSE improved... (107.5897223806958->84.01260080415825)
+| epoch   4 |    10 batches | ms/batch 41.88786 | train loss 0.03691
+| epoch   4 |    20 batches | ms/batch 47.77224 | train loss 0.02549
+| epoch   4 |    30 batches | ms/batch 43.18447 | train loss 0.02321
+| epoch   4 |    40 batches | ms/batch 43.08476 | train loss 0.02230
+| epoch   4 |    50 batches | ms/batch 46.87459 | train loss 0.02271
+Precision per label/weight
+[[0.         0.         0.04545455 0.07142857 0.15384615 0.
+  0.        ]]
+false positives per label/weight
+[[ 9. 11. 18. 12.  9.  6. 13.]]
+false negatives per label/weight
+[[0. 0. 3. 1. 2. 6. 8.]]
+RMSE per label/weight
+[[ 56.62907097  50.68705069  55.24134349  46.78411757  36.66528705
+   90.5623956  111.57007088]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 72.23335174886765
+RMSE improved... (84.01260080415825->72.23335174886765)
+| epoch   5 |    10 batches | ms/batch 48.07160 | train loss 0.02327
+| epoch   5 |    20 batches | ms/batch 48.27068 | train loss 0.02116
+| epoch   5 |    30 batches | ms/batch 48.07143 | train loss 0.02641
+| epoch   5 |    40 batches | ms/batch 51.26288 | train loss 0.02418
+| epoch   5 |    50 batches | ms/batch 48.17119 | train loss 0.02316
+Precision per label/weight
+[[0.11111111 0.09090909 0.13636364 0.14285714 0.15384615 0.16666667
+  0.04761905]]
+false positives per label/weight
+[[ 8.  9. 15. 10.  7.  3.  8.]]
+false negatives per label/weight
+[[ 0.  1.  4.  2.  4.  7. 12.]]
+RMSE per label/weight
+[[ 35.57325185  29.19703786  34.37841662  25.15719934  22.21320161
+   89.16719143 118.22262802]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 66.49194809245401
+RMSE improved... (72.23335174886765->66.49194809245401)
+| epoch   6 |    10 batches | ms/batch 49.06876 | train loss 0.01983
+| epoch   6 |    20 batches | ms/batch 51.11415 | train loss 0.01956
+| epoch   6 |    30 batches | ms/batch 50.46608 | train loss 0.01920
+| epoch   6 |    40 batches | ms/batch 48.08238 | train loss 0.01961
+| epoch   6 |    50 batches | ms/batch 52.65086 | train loss 0.01837
+Precision per label/weight
+[[0.         0.         0.09090909 0.         0.15384615 0.
+  0.        ]]
+false positives per label/weight
+[[ 9. 11. 19. 13. 10.  8. 15.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 1. 4. 6.]]
+RMSE per label/weight
+[[ 42.84618956  36.67413847  39.92109199  34.51048963  26.61987484
+   87.46617466 111.44754946]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 66.04363284063494
+RMSE improved... (66.49194809245401->66.04363284063494)
+| epoch   7 |    10 batches | ms/batch 53.35853 | train loss 0.02763
+| epoch   7 |    20 batches | ms/batch 49.66733 | train loss 0.02714
+| epoch   7 |    30 batches | ms/batch 54.46837 | train loss 0.02404
+| epoch   7 |    40 batches | ms/batch 49.86658 | train loss 0.02120
+| epoch   7 |    50 batches | ms/batch 52.20189 | train loss 0.01992
+Precision per label/weight
+[[0.11111111 0.09090909 0.18181818 0.21428571 0.30769231 0.08333333
+  0.04761905]]
+false positives per label/weight
+[[ 8. 10. 15.  9.  6.  4. 10.]]
+false negatives per label/weight
+[[ 0.  0.  3.  2.  3.  7. 10.]]
+RMSE per label/weight
+[[ 27.88615438  21.38150769  24.96766714  17.8219043   14.01945807
+   86.47868256 107.63403203]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 59.88333074185103
+RMSE improved... (66.04363284063494->59.88333074185103)
+| epoch   8 |    10 batches | ms/batch 46.29114 | train loss 0.01073
+| epoch   8 |    20 batches | ms/batch 50.25821 | train loss 0.01260
+| epoch   8 |    30 batches | ms/batch 44.48488 | train loss 0.01438
+| epoch   8 |    40 batches | ms/batch 52.65915 | train loss 0.01298
+| epoch   8 |    50 batches | ms/batch 51.10424 | train loss 0.01583
+Precision per label/weight
+[[0.         0.09090909 0.09090909 0.07142857 0.15384615 0.08333333
+  0.        ]]
+false positives per label/weight
+[[ 9. 10. 18. 12.  9.  7. 14.]]
+false negatives per label/weight
+[[0. 0. 2. 1. 2. 4. 7.]]
+RMSE per label/weight
+[[ 28.02580105  22.09040285  23.15245941  19.04378059  14.14028862
+   83.25710686 104.17174458]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 57.98698668769205
+RMSE improved... (59.88333074185103->57.98698668769205)
+| epoch   9 |    10 batches | ms/batch 55.39246 | train loss 0.01798
+| epoch   9 |    20 batches | ms/batch 51.76144 | train loss 0.01817
+| epoch   9 |    30 batches | ms/batch 53.15862 | train loss 0.01333
+| epoch   9 |    40 batches | ms/batch 50.66369 | train loss 0.01572
+| epoch   9 |    50 batches | ms/batch 51.44582 | train loss 0.01727
+Precision per label/weight
+[[0.         0.         0.18181818 0.35714286 0.15384615 0.33333333
+  0.14285714]]
+false positives per label/weight
+[[ 9. 11. 16.  8.  8.  1.  7.]]
+false negatives per label/weight
+[[ 0.  0.  2.  1.  3.  7. 11.]]
+RMSE per label/weight
+[[ 24.13007436  18.9137547   19.38189521  14.19574305   9.7445809
+   83.61080174 101.56063366]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 56.18514195286933
+RMSE improved... (57.98698668769205->56.18514195286933)
+| epoch  10 |    10 batches | ms/batch 52.35329 | train loss 0.01914
+| epoch  10 |    20 batches | ms/batch 51.06339 | train loss 0.01811
+| epoch  10 |    30 batches | ms/batch 49.79129 | train loss 0.01919
+| epoch  10 |    40 batches | ms/batch 50.16570 | train loss 0.02143
+| epoch  10 |    50 batches | ms/batch 50.96371 | train loss 0.01807
+Precision per label/weight
+[[0.11111111 0.27272727 0.22727273 0.42857143 0.46153846 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 8.  8. 14.  6.  2.  1.  7.]]
+false negatives per label/weight
+[[ 0.  0.  3.  2.  5. 11. 12.]]
+RMSE per label/weight
+[[ 16.58907079  11.82686846  11.81987458   8.11590984   8.00550415
+   84.7976816  101.53475763]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 55.273607499737345
+RMSE improved... (56.18514195286933->55.273607499737345)
+| epoch  11 |    10 batches | ms/batch 51.66175 | train loss 0.02313
+| epoch  11 |    20 batches | ms/batch 51.56224 | train loss 0.02088
+| epoch  11 |    30 batches | ms/batch 47.47288 | train loss 0.01742
+| epoch  11 |    40 batches | ms/batch 50.56479 | train loss 0.01462
+| epoch  11 |    50 batches | ms/batch 45.77749 | train loss 0.01495
+Precision per label/weight
+[[0.11111111 0.27272727 0.27272727 0.21428571 0.53846154 0.08333333
+  0.14285714]]
+false positives per label/weight
+[[ 8.  8. 13.  6.  1.  0.  4.]]
+false negatives per label/weight
+[[ 0.  0.  3.  5.  5. 11. 14.]]
+RMSE per label/weight
+[[ 15.06283846  10.78170408  10.06480187   7.26042703   7.84449144
+   85.33454514 102.26267806]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 55.490843834310965
+| epoch  12 |    10 batches | ms/batch 49.66722 | train loss 0.00540
+| epoch  12 |    20 batches | ms/batch 46.57545 | train loss 0.00772
+| epoch  12 |    30 batches | ms/batch 50.66450 | train loss 0.00813
+| epoch  12 |    40 batches | ms/batch 48.96894 | train loss 0.01393
+| epoch  12 |    50 batches | ms/batch 50.46501 | train loss 0.01620
+Precision per label/weight
+[[0.         0.         0.13636364 0.42857143 0.38461538 0.41666667
+  0.0952381 ]]
+false positives per label/weight
+[[ 9. 11. 18.  8.  7.  1. 10.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 1. 6. 9.]]
+RMSE per label/weight
+[[19.7174522  15.89603444 15.03956056 11.65888731  8.86537928 80.17223244
+  93.57590209]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 51.94226611762969
+RMSE improved... (55.273607499737345->51.94226611762969)
+| epoch  13 |    10 batches | ms/batch 48.86930 | train loss 0.01951
+| epoch  13 |    20 batches | ms/batch 51.86393 | train loss 0.01606
+| epoch  13 |    30 batches | ms/batch 52.15788 | train loss 0.01241
+| epoch  13 |    40 batches | ms/batch 51.46232 | train loss 0.01382
+| epoch  13 |    50 batches | ms/batch 50.56479 | train loss 0.01251
+Precision per label/weight
+[[0.11111111 0.27272727 0.31818182 0.28571429 0.46153846 0.
+  0.14285714]]
+false positives per label/weight
+[[ 8.  8. 13.  7.  2.  1.  6.]]
+false negatives per label/weight
+[[ 0.  0.  2.  3.  5. 11. 12.]]
+RMSE per label/weight
+[[14.08757836 10.49533186  9.56456596  7.21136918  7.06340966 83.01404177
+  95.29667058]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 52.374366491091905
+| epoch  14 |    10 batches | ms/batch 53.05803 | train loss 0.00430
+| epoch  14 |    20 batches | ms/batch 57.26409 | train loss 0.00824
+| epoch  14 |    30 batches | ms/batch 52.94118 | train loss 0.00824
+| epoch  14 |    40 batches | ms/batch 51.06351 | train loss 0.00936
+| epoch  14 |    50 batches | ms/batch 54.15509 | train loss 0.01477
+Precision per label/weight
+[[0.         0.         0.04545455 0.         0.         0.08333333
+  0.14285714]]
+false positives per label/weight
+[[ 9. 11. 21. 14. 13.  7. 15.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 4. 3.]]
+RMSE per label/weight
+[[25.93605815 23.43398624 23.9320566  21.86406823 19.42637264 78.56549573
+  93.51596769]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 53.68883260821483
+| epoch  15 |    10 batches | ms/batch 50.56486 | train loss 0.01452
+| epoch  15 |    20 batches | ms/batch 44.78011 | train loss 0.01307
+| epoch  15 |    30 batches | ms/batch 48.96941 | train loss 0.01491
+| epoch  15 |    40 batches | ms/batch 50.06578 | train loss 0.01289
+| epoch  15 |    50 batches | ms/batch 48.76945 | train loss 0.01387
+Precision per label/weight
+[[0.         0.         0.04545455 0.28571429 0.23076923 0.08333333
+  0.0952381 ]]
+false positives per label/weight
+[[ 9. 11. 20. 10. 10.  6. 14.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 5. 5.]]
+RMSE per label/weight
+[[20.47429561 17.59692312 17.70235497 15.62147893 12.81659883 78.24518756
+  88.76671586]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 50.34808925423955
+RMSE improved... (51.94226611762969->50.34808925423955)
+| epoch  16 |    10 batches | ms/batch 48.17116 | train loss 0.00974
+| epoch  16 |    20 batches | ms/batch 50.46504 | train loss 0.01350
+| epoch  16 |    30 batches | ms/batch 49.36800 | train loss 0.01288
+| epoch  16 |    40 batches | ms/batch 52.85878 | train loss 0.01612
+| epoch  16 |    50 batches | ms/batch 49.96626 | train loss 0.01473
+Precision per label/weight
+[[0.         0.36363636 0.36363636 0.35714286 0.30769231 0.08333333
+  0.        ]]
+false positives per label/weight
+[[ 9.  7. 12.  4.  3.  0.  0.]]
+false negatives per label/weight
+[[ 0.  0.  2.  5.  6. 11. 21.]]
+RMSE per label/weight
+[[ 14.48119517  11.27703814  10.25463256   8.69498738   7.54137572
+   85.51707712 100.31747793]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 54.81618542557144
+| epoch  17 |    10 batches | ms/batch 55.65119 | train loss 0.00750
+| epoch  17 |    20 batches | ms/batch 51.28813 | train loss 0.01550
+| epoch  17 |    30 batches | ms/batch 59.24156 | train loss 0.01263
+| epoch  17 |    40 batches | ms/batch 52.50340 | train loss 0.01402
+| epoch  17 |    50 batches | ms/batch 54.15549 | train loss 0.01307
+Precision per label/weight
+[[0.         0.27272727 0.31818182 0.35714286 0.46153846 0.33333333
+  0.0952381 ]]
+false positives per label/weight
+[[ 9.  8. 13.  8.  5.  2. 13.]]
+false negatives per label/weight
+[[0. 0. 2. 1. 2. 6. 6.]]
+RMSE per label/weight
+[[13.15196748 10.80621066 10.08014378  8.80730561  7.68278055 79.08620291
+  87.25347711]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 48.69493478945981
+RMSE improved... (50.34808925423955->48.69493478945981)
+| epoch  18 |    10 batches | ms/batch 69.77556 | train loss 0.01398
+| epoch  18 |    20 batches | ms/batch 60.63786 | train loss 0.01431
+| epoch  18 |    30 batches | ms/batch 71.12288 | train loss 0.01562
+| epoch  18 |    40 batches | ms/batch 68.20548 | train loss 0.01376
+| epoch  18 |    50 batches | ms/batch 67.61861 | train loss 0.01308
+Precision per label/weight
+[[0.         0.         0.04545455 0.21428571 0.23076923 0.25
+  0.04761905]]
+false positives per label/weight
+[[ 9. 11. 20. 11. 10.  6. 17.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 3. 3.]]
+RMSE per label/weight
+[[16.58986865 14.3815581  14.12621394 13.66307249 12.80361655 76.95410586
+  89.13607342]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 49.68529538592645
+| epoch  19 |    10 batches | ms/batch 65.12935 | train loss 0.02247
+| epoch  19 |    20 batches | ms/batch 67.91837 | train loss 0.02212
+| epoch  19 |    30 batches | ms/batch 59.54065 | train loss 0.01663
+| epoch  19 |    40 batches | ms/batch 59.54087 | train loss 0.01451
+| epoch  19 |    50 batches | ms/batch 61.53533 | train loss 0.01335
+Precision per label/weight
+[[0.44444444 0.81818182 0.5        0.42857143 0.23076923 0.08333333
+  0.04761905]]
+false positives per label/weight
+[[5. 2. 2. 0. 0. 0. 0.]]
+false negatives per label/weight
+[[ 0.  0.  9.  8. 10. 11. 20.]]
+RMSE per label/weight
+[[ 6.4825478   5.65569801  7.19575648 10.98064488 12.58118096 85.8473737
+  96.01573176]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 53.10474858390116
+| epoch  20 |    10 batches | ms/batch 60.75068 | train loss 0.01881
+| epoch  20 |    20 batches | ms/batch 57.04744 | train loss 0.01925
+| epoch  20 |    30 batches | ms/batch 59.14180 | train loss 0.01464
+| epoch  20 |    40 batches | ms/batch 53.35746 | train loss 0.01447
+| epoch  20 |    50 batches | ms/batch 51.66161 | train loss 0.01322
+Precision per label/weight
+[[0.         0.54545455 0.5        0.42857143 0.46153846 0.25
+  0.14285714]]
+false positives per label/weight
+[[ 9.  5. 10.  7.  5.  2. 12.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 2. 7. 6.]]
+RMSE per label/weight
+[[11.26211299  9.14921033  7.8279102   7.34038089  7.82016187 78.13691533
+  86.70196454]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 48.109974726067264
+RMSE improved... (48.69493478945981->48.109974726067264)
+| epoch  21 |    10 batches | ms/batch 54.57888 | train loss 0.00375
+| epoch  21 |    20 batches | ms/batch 51.16296 | train loss 0.00532
+| epoch  21 |    30 batches | ms/batch 51.76148 | train loss 0.00824
+| epoch  21 |    40 batches | ms/batch 69.11528 | train loss 0.01136
+| epoch  21 |    50 batches | ms/batch 72.30656 | train loss 0.01047
+Precision per label/weight
+[[0.         0.27272727 0.13636364 0.21428571 0.46153846 0.25
+  0.14285714]]
+false positives per label/weight
+[[ 9.  8. 18. 10.  7.  2. 10.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 0. 7. 8.]]
+RMSE per label/weight
+[[15.139052   13.92403752 12.99072075 11.80848494 11.17485792 77.19268217
+  83.66730299]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.485058751443425
+RMSE improved... (48.109974726067264->47.485058751443425)
+| epoch  22 |    10 batches | ms/batch 71.95861 | train loss 0.01518
+| epoch  22 |    20 batches | ms/batch 69.01560 | train loss 0.00979
+| epoch  22 |    30 batches | ms/batch 68.01784 | train loss 0.01100
+| epoch  22 |    40 batches | ms/batch 68.23111 | train loss 0.01235
+| epoch  22 |    50 batches | ms/batch 66.52205 | train loss 0.01218
+Precision per label/weight
+[[0.         0.09090909 0.13636364 0.28571429 0.38461538 0.25
+  0.14285714]]
+false positives per label/weight
+[[ 9. 10. 18. 10.  8.  2. 10.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 7. 8.]]
+RMSE per label/weight
+[[14.77751979 12.33873987 11.18418712 10.25011937 10.80416508 76.49529601
+  85.15093579]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.67774177645678
+| epoch  23 |    10 batches | ms/batch 63.13088 | train loss 0.01594
+| epoch  23 |    20 batches | ms/batch 73.70293 | train loss 0.01359
+| epoch  23 |    30 batches | ms/batch 72.60573 | train loss 0.01631
+| epoch  23 |    40 batches | ms/batch 64.02874 | train loss 0.01363
+| epoch  23 |    50 batches | ms/batch 56.94761 | train loss 0.01223
+Precision per label/weight
+[[0.         0.09090909 0.18181818 0.35714286 0.38461538 0.41666667
+  0.14285714]]
+false positives per label/weight
+[[ 9. 10. 17.  9.  8.  2. 12.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 5. 6.]]
+RMSE per label/weight
+[[15.26251552 13.21488649 12.40084964 11.56564184 10.83004288 76.93057303
+  82.46854678]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.92924956409115
+RMSE improved... (47.485058751443425->46.92924956409115)
+| epoch  24 |    10 batches | ms/batch 56.44901 | train loss 0.01278
+| epoch  24 |    20 batches | ms/batch 52.97432 | train loss 0.00966
+| epoch  24 |    30 batches | ms/batch 59.74030 | train loss 0.01394
+| epoch  24 |    40 batches | ms/batch 54.35455 | train loss 0.01265
+| epoch  24 |    50 batches | ms/batch 62.13388 | train loss 0.01225
+Precision per label/weight
+[[0.         0.54545455 0.36363636 0.35714286 0.53846154 0.33333333
+  0.33333333]]
+false positives per label/weight
+[[ 9.  5. 13.  8.  6.  1.  5.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 0. 7. 9.]]
+RMSE per label/weight
+[[11.32652854  9.05313924  8.7104058   8.78644878  9.14818374 77.72218629
+  85.0587414 ]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.51859829491571
+| epoch  25 |    10 batches | ms/batch 69.42401 | train loss 0.02042
+| epoch  25 |    20 batches | ms/batch 69.39909 | train loss 0.01713
+| epoch  25 |    30 batches | ms/batch 66.72153 | train loss 0.01449
+| epoch  25 |    40 batches | ms/batch 71.70820 | train loss 0.01420
+| epoch  25 |    50 batches | ms/batch 65.52472 | train loss 0.01312
+Precision per label/weight
+[[0.         0.54545455 0.31818182 0.42857143 0.30769231 0.16666667
+  0.        ]]
+false positives per label/weight
+[[ 9.  5. 14.  7.  8.  7. 18.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 1. 3. 3.]]
+RMSE per label/weight
+[[11.17545672  9.24866867  8.55707425  9.5883164  10.49299872 76.88554324
+  84.56387914]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.22733672206145
+| epoch  26 |    10 batches | ms/batch 62.13377 | train loss 0.01040
+| epoch  26 |    20 batches | ms/batch 72.55726 | train loss 0.00887
+| epoch  26 |    30 batches | ms/batch 92.98940 | train loss 0.00749
+| epoch  26 |    40 batches | ms/batch 70.71068 | train loss 0.00941
+| epoch  26 |    50 batches | ms/batch 74.10197 | train loss 0.00931
+Precision per label/weight
+[[0.         0.09090909 0.04545455 0.21428571 0.23076923 0.08333333
+  0.14285714]]
+false positives per label/weight
+[[ 9. 10. 20. 11. 10.  8. 15.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 3. 3.]]
+RMSE per label/weight
+[[16.04218685 13.99035297 14.38404228 14.73035213 15.73832281 75.0967264
+  82.10984052]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.918324168616685
+RMSE improved... (46.92924956409115->46.918324168616685)
+| epoch  27 |    10 batches | ms/batch 61.13646 | train loss 0.00861
+| epoch  27 |    20 batches | ms/batch 80.68426 | train loss 0.00768
+| epoch  27 |    30 batches | ms/batch 92.15357 | train loss 0.01006
+| epoch  27 |    40 batches | ms/batch 73.97387 | train loss 0.01131
+| epoch  27 |    50 batches | ms/batch 67.12039 | train loss 0.01113
+Precision per label/weight
+[[0.         0.36363636 0.22727273 0.35714286 0.30769231 0.5
+  0.19047619]]
+false positives per label/weight
+[[ 9.  7. 16.  8.  9.  3. 11.]]
+false negatives per label/weight
+[[0. 0. 1. 1. 0. 3. 6.]]
+RMSE per label/weight
+[[12.4286818   9.99292158  9.51054531  9.49995896 11.18421636 75.39326653
+  82.65319359]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.34065183479621
+RMSE improved... (46.918324168616685->46.34065183479621)
+| epoch  28 |    10 batches | ms/batch 57.99885 | train loss 0.00989
+| epoch  28 |    20 batches | ms/batch 53.15783 | train loss 0.01081
+| epoch  28 |    30 batches | ms/batch 56.44901 | train loss 0.01404
+| epoch  28 |    40 batches | ms/batch 52.36013 | train loss 0.01296
+| epoch  28 |    50 batches | ms/batch 50.86389 | train loss 0.01123
+Precision per label/weight
+[[0.22222222 0.72727273 0.59090909 0.5        0.38461538 0.08333333
+  0.04761905]]
+false positives per label/weight
+[[7. 3. 3. 1. 3. 0. 4.]]
+false negatives per label/weight
+[[ 0.  0.  6.  6.  5. 11. 16.]]
+RMSE per label/weight
+[[ 7.12007082  5.71359393  5.38071569  7.21301694  8.29763074 79.47975314
+  88.94462477]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 49.01122247210282
+| epoch  29 |    10 batches | ms/batch 49.56737 | train loss 0.00360
+| epoch  29 |    20 batches | ms/batch 47.57276 | train loss 0.01055
+| epoch  29 |    30 batches | ms/batch 48.57006 | train loss 0.01107
+| epoch  29 |    40 batches | ms/batch 49.46778 | train loss 0.01451
+| epoch  29 |    50 batches | ms/batch 47.87185 | train loss 0.01264
+Precision per label/weight
+[[0.33333333 0.63636364 0.72727273 0.42857143 0.38461538 0.5
+  0.14285714]]
+false positives per label/weight
+[[6. 3. 3. 2. 4. 1. 6.]]
+false negatives per label/weight
+[[ 0.  1.  3.  6.  4.  5. 12.]]
+RMSE per label/weight
+[[ 7.72696466  6.18872318  4.99743725  6.68150907  8.15974722 77.50738535
+  84.93335705]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.13087367388589
+| epoch  30 |    10 batches | ms/batch 48.27077 | train loss 0.00909
+| epoch  30 |    20 batches | ms/batch 49.26817 | train loss 0.00881
+| epoch  30 |    30 batches | ms/batch 51.46253 | train loss 0.01516
+| epoch  30 |    40 batches | ms/batch 53.85573 | train loss 0.01209
+| epoch  30 |    50 batches | ms/batch 53.95570 | train loss 0.01161
+Precision per label/weight
+[[0.11111111 0.63636364 0.59090909 0.42857143 0.46153846 0.5
+  0.14285714]]
+false positives per label/weight
+[[8. 4. 7. 5. 4. 2. 6.]]
+false negatives per label/weight
+[[ 0.  0.  2.  3.  3.  4. 12.]]
+RMSE per label/weight
+[[10.32108892  7.78758923  6.21454473  6.97852773  8.73599948 76.01067526
+  83.27951257]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.349684380238635
+| epoch  31 |    10 batches | ms/batch 54.45499 | train loss 0.01133
+| epoch  31 |    20 batches | ms/batch 51.46217 | train loss 0.01008
+| epoch  31 |    30 batches | ms/batch 54.35464 | train loss 0.01210
+| epoch  31 |    40 batches | ms/batch 50.76430 | train loss 0.01162
+| epoch  31 |    50 batches | ms/batch 53.05824 | train loss 0.01163
+Precision per label/weight
+[[0.11111111 0.36363636 0.45454545 0.14285714 0.23076923 0.5
+  0.14285714]]
+false positives per label/weight
+[[ 8.  7. 10.  9.  8.  1.  5.]]
+false negatives per label/weight
+[[ 0.  0.  2.  3.  2.  5. 13.]]
+RMSE per label/weight
+[[11.9002495   9.19721209  8.02155904  8.51286295  9.77015649 75.89070121
+  84.09549295]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.81021155670815
+| epoch  32 |    10 batches | ms/batch 53.05817 | train loss 0.01322
+| epoch  32 |    20 batches | ms/batch 55.66754 | train loss 0.01489
+| epoch  32 |    30 batches | ms/batch 52.34361 | train loss 0.01526
+| epoch  32 |    40 batches | ms/batch 55.45177 | train loss 0.01455
+| epoch  32 |    50 batches | ms/batch 51.26269 | train loss 0.01237
+Precision per label/weight
+[[0.33333333 0.63636364 0.59090909 0.5        0.38461538 0.5
+  0.14285714]]
+false positives per label/weight
+[[6. 3. 2. 1. 4. 0. 5.]]
+false negatives per label/weight
+[[ 0.  1.  7.  6.  4.  6. 13.]]
+RMSE per label/weight
+[[ 6.2193285   5.71001677  5.84467317  7.02541729  9.31003284 77.27675673
+  86.12074709]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 47.55686899796422
+| epoch  33 |    10 batches | ms/batch 47.67253 | train loss 0.01119
+| epoch  33 |    20 batches | ms/batch 54.15502 | train loss 0.01280
+| epoch  33 |    30 batches | ms/batch 46.47567 | train loss 0.01198
+| epoch  33 |    40 batches | ms/batch 49.36855 | train loss 0.01011
+| epoch  33 |    50 batches | ms/batch 50.16525 | train loss 0.01078
+Precision per label/weight
+[[0.33333333 0.72727273 0.45454545 0.57142857 0.38461538 0.41666667
+  0.14285714]]
+false positives per label/weight
+[[6. 3. 1. 0. 3. 2. 6.]]
+false negatives per label/weight
+[[ 0.  0. 11.  6.  5.  5. 12.]]
+RMSE per label/weight
+[[ 5.96735947  5.13755285  6.76182299  8.44460779  9.45118302 77.5880985
+  84.04429219]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.89867635181455
+| epoch  34 |    10 batches | ms/batch 51.06359 | train loss 0.01049
+| epoch  34 |    20 batches | ms/batch 50.56455 | train loss 0.00680
+| epoch  34 |    30 batches | ms/batch 54.46677 | train loss 0.00837
+| epoch  34 |    40 batches | ms/batch 52.55959 | train loss 0.01200
+| epoch  34 |    50 batches | ms/batch 55.55131 | train loss 0.01074
+Precision per label/weight
+[[0.11111111 0.54545455 0.59090909 0.14285714 0.53846154 0.25
+  0.0952381 ]]
+false positives per label/weight
+[[8. 5. 6. 8. 4. 2. 4.]]
+false negatives per label/weight
+[[ 0.  0.  3.  4.  2.  7. 15.]]
+RMSE per label/weight
+[[ 9.45718085  7.36741994  6.35889785  7.38241414 10.10204931 75.62493069
+  84.36600832]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.70316316392172
+| epoch  35 |    10 batches | ms/batch 52.55964 | train loss 0.01905
+| epoch  35 |    20 batches | ms/batch 51.56188 | train loss 0.01928
+| epoch  35 |    30 batches | ms/batch 48.27087 | train loss 0.01622
+| epoch  35 |    40 batches | ms/batch 55.05273 | train loss 0.01306
+| epoch  35 |    50 batches | ms/batch 51.56212 | train loss 0.01178
+Precision per label/weight
+[[0.33333333 0.54545455 0.45454545 0.57142857 0.38461538 0.41666667
+  0.04761905]]
+false positives per label/weight
+[[6. 4. 5. 1. 3. 1. 4.]]
+false negatives per label/weight
+[[ 0.  1.  7.  5.  5.  6. 16.]]
+RMSE per label/weight
+[[ 7.36666851  5.91989984  6.32656973  7.91589831  8.97869863 77.40136859
+  83.857595  ]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.78333803783738
+| epoch  36 |    10 batches | ms/batch 53.25754 | train loss 0.02505
+| epoch  36 |    20 batches | ms/batch 55.55151 | train loss 0.01702
+| epoch  36 |    30 batches | ms/batch 51.66199 | train loss 0.01254
+| epoch  36 |    40 batches | ms/batch 52.85835 | train loss 0.01161
+| epoch  36 |    50 batches | ms/batch 54.07860 | train loss 0.01116
+Precision per label/weight
+[[0.22222222 0.63636364 0.45454545 0.35714286 0.15384615 0.16666667
+  0.14285714]]
+false positives per label/weight
+[[ 7.  3. 10.  9.  9.  7. 14.]]
+false negatives per label/weight
+[[0. 1. 2. 0. 2. 3. 4.]]
+RMSE per label/weight
+[[ 8.73750872  7.3970157   6.66826943  9.8702491  14.6503637  74.79798654
+  81.81257529]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.816927656822976
+RMSE improved... (46.34065183479621->45.816927656822976)
+| epoch  37 |    10 batches | ms/batch 54.81830 | train loss 0.00371
+| epoch  37 |    20 batches | ms/batch 50.56479 | train loss 0.00866
+| epoch  37 |    30 batches | ms/batch 47.97242 | train loss 0.01061
+| epoch  37 |    40 batches | ms/batch 47.87183 | train loss 0.01013
+| epoch  37 |    50 batches | ms/batch 56.05011 | train loss 0.01189
+Precision per label/weight
+[[0.         0.09090909 0.09090909 0.28571429 0.23076923 0.
+  0.04761905]]
+false positives per label/weight
+[[ 9. 10. 19. 10. 10.  9. 17.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 3. 3.]]
+RMSE per label/weight
+[[13.88106143 11.90875997 12.06037483 14.00427987 17.4049388  74.97928482
+  79.25294281]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.648082167210006
+RMSE improved... (45.816927656822976->45.648082167210006)
+| epoch  38 |    10 batches | ms/batch 54.13392 | train loss 0.01994
+| epoch  38 |    20 batches | ms/batch 51.45845 | train loss 0.01968
+| epoch  38 |    30 batches | ms/batch 55.15254 | train loss 0.01579
+| epoch  38 |    40 batches | ms/batch 55.45232 | train loss 0.01297
+| epoch  38 |    50 batches | ms/batch 58.14431 | train loss 0.01104
+Precision per label/weight
+[[0.11111111 0.63636364 0.40909091 0.35714286 0.23076923 0.58333333
+  0.04761905]]
+false positives per label/weight
+[[8. 3. 1. 1. 2. 1. 5.]]
+false negatives per label/weight
+[[ 0.  1. 12.  8.  8.  4. 15.]]
+RMSE per label/weight
+[[ 7.61915772  5.9269131   7.28808742 10.32425972 10.49100019 77.78621261
+  81.67942504]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.19979282860907
+| epoch  39 |    10 batches | ms/batch 53.55663 | train loss 0.01220
+| epoch  39 |    20 batches | ms/batch 52.04065 | train loss 0.01193
+| epoch  39 |    30 batches | ms/batch 51.26293 | train loss 0.01206
+| epoch  39 |    40 batches | ms/batch 55.54864 | train loss 0.00971
+| epoch  39 |    50 batches | ms/batch 49.07045 | train loss 0.00847
+Precision per label/weight
+[[0.44444444 0.63636364 0.59090909 0.57142857 0.38461538 0.16666667
+  0.23809524]]
+false positives per label/weight
+[[5. 3. 1. 1. 4. 7. 9.]]
+false negatives per label/weight
+[[0. 1. 8. 5. 4. 3. 7.]]
+RMSE per label/weight
+[[ 6.35542129  5.38467164  5.978257    6.29585866 10.36922816 76.05697788
+  81.00140089]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.44153408569817
+RMSE improved... (45.648082167210006->45.44153408569817)
+| epoch  40 |    10 batches | ms/batch 49.36790 | train loss 0.00986
+| epoch  40 |    20 batches | ms/batch 59.52959 | train loss 0.00924
+| epoch  40 |    30 batches | ms/batch 51.46234 | train loss 0.00998
+| epoch  40 |    40 batches | ms/batch 53.45700 | train loss 0.00973
+| epoch  40 |    50 batches | ms/batch 52.06070 | train loss 0.01030
+Precision per label/weight
+[[0.22222222 0.72727273 0.68181818 0.35714286 0.15384615 0.16666667
+  0.14285714]]
+false positives per label/weight
+[[7. 3. 6. 8. 7. 7. 5.]]
+false negatives per label/weight
+[[ 0.  0.  1.  1.  4.  3. 13.]]
+RMSE per label/weight
+[[ 8.61577146  6.39679601  5.41787675  7.70530959 12.55486476 74.6303155
+  80.77934434]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.21320433869948
+RMSE improved... (45.44153408569817->45.21320433869948)
+| epoch  41 |    10 batches | ms/batch 50.56479 | train loss 0.00423
+| epoch  41 |    20 batches | ms/batch 48.17107 | train loss 0.00905
+| epoch  41 |    30 batches | ms/batch 55.65124 | train loss 0.00849
+| epoch  41 |    40 batches | ms/batch 49.48161 | train loss 0.01048
+| epoch  41 |    50 batches | ms/batch 57.44648 | train loss 0.00928
+Precision per label/weight
+[[0.22222222 0.72727273 0.45454545 0.5        0.38461538 0.16666667
+  0.        ]]
+false positives per label/weight
+[[7. 3. 2. 1. 2. 0. 3.]]
+false negatives per label/weight
+[[ 0.  0. 10.  6.  6. 10. 18.]]
+RMSE per label/weight
+[[ 8.00292322  5.42628077  6.874279    8.78474878 10.26686243 78.11537887
+  92.15398918]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 50.09347272327725
+| epoch  42 |    10 batches | ms/batch 59.34122 | train loss 0.01056
+| epoch  42 |    20 batches | ms/batch 50.77579 | train loss 0.01372
+| epoch  42 |    30 batches | ms/batch 52.54776 | train loss 0.01352
+| epoch  42 |    40 batches | ms/batch 51.06349 | train loss 0.01249
+| epoch  42 |    50 batches | ms/batch 54.56178 | train loss 0.01110
+Precision per label/weight
+[[0.77777778 0.45454545 0.09090909 0.         0.23076923 0.16666667
+  0.        ]]
+false positives per label/weight
+[[2. 1. 0. 0. 1. 0. 3.]]
+false negatives per label/weight
+[[ 0.  5. 20. 14.  9. 10. 18.]]
+RMSE per label/weight
+[[ 3.97067285  5.83261016 11.59253847 14.84494586 15.5854472  79.24439405
+  91.88232686]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 50.71656200111509
+| epoch  43 |    10 batches | ms/batch 51.66218 | train loss 0.02462
+| epoch  43 |    20 batches | ms/batch 52.45960 | train loss 0.01560
+| epoch  43 |    30 batches | ms/batch 50.46504 | train loss 0.01265
+| epoch  43 |    40 batches | ms/batch 54.85299 | train loss 0.01156
+| epoch  43 |    50 batches | ms/batch 48.96908 | train loss 0.01121
+Precision per label/weight
+[[0.33333333 0.63636364 0.59090909 0.35714286 0.15384615 0.
+  0.        ]]
+false positives per label/weight
+[[ 6.  3.  7.  9.  9.  9. 18.]]
+false negatives per label/weight
+[[0. 1. 2. 0. 2. 3. 3.]]
+RMSE per label/weight
+[[ 8.91464748  6.5035134   5.92407208  9.4986801  16.17321797 76.02272362
+  82.19065058]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.2125299744035
+| epoch  44 |    10 batches | ms/batch 49.56732 | train loss 0.01967
+| epoch  44 |    20 batches | ms/batch 52.06094 | train loss 0.01379
+| epoch  44 |    30 batches | ms/batch 50.16568 | train loss 0.01041
+| epoch  44 |    40 batches | ms/batch 49.07851 | train loss 0.00958
+| epoch  44 |    50 batches | ms/batch 51.25332 | train loss 0.01020
+Precision per label/weight
+[[0.22222222 0.72727273 0.72727273 0.28571429 0.15384615 0.16666667
+  0.19047619]]
+false positives per label/weight
+[[ 7.  3.  3.  7.  7.  7. 11.]]
+false negatives per label/weight
+[[0. 0. 3. 3. 4. 3. 6.]]
+RMSE per label/weight
+[[ 9.40426735  6.03798417  5.10240013  6.65416906 12.55712673 74.60595521
+  79.36309713]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.66658710686763
+RMSE improved... (45.21320433869948->44.66658710686763)
+| epoch  45 |    10 batches | ms/batch 55.25227 | train loss 0.01435
+| epoch  45 |    20 batches | ms/batch 56.16305 | train loss 0.00853
+| epoch  45 |    30 batches | ms/batch 58.23100 | train loss 0.01217
+| epoch  45 |    40 batches | ms/batch 59.35311 | train loss 0.01053
+| epoch  45 |    50 batches | ms/batch 63.11924 | train loss 0.00960
+Precision per label/weight
+[[0.11111111 0.45454545 0.22727273 0.42857143 0.38461538 0.41666667
+  0.04761905]]
+false positives per label/weight
+[[8. 6. 5. 2. 3. 3. 3.]]
+false negatives per label/weight
+[[ 0.  0. 12.  6.  5.  4. 17.]]
+RMSE per label/weight
+[[10.51947739  7.56640769  7.61770757  8.90460978 10.44998173 76.55976853
+  82.70523365]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.379942242944814
+| epoch  46 |    10 batches | ms/batch 66.52200 | train loss 0.01238
+| epoch  46 |    20 batches | ms/batch 60.03945 | train loss 0.01522
+| epoch  46 |    30 batches | ms/batch 57.04765 | train loss 0.01312
+| epoch  46 |    40 batches | ms/batch 70.42048 | train loss 0.01075
+| epoch  46 |    50 batches | ms/batch 67.37134 | train loss 0.01102
+Precision per label/weight
+[[0.11111111 0.63636364 0.31818182 0.57142857 0.30769231 0.5
+  0.04761905]]
+false positives per label/weight
+[[8. 3. 1. 1. 3. 2. 3.]]
+false negatives per label/weight
+[[ 0.  1. 14.  5.  6.  4. 17.]]
+RMSE per label/weight
+[[ 7.89467495  5.51877036  7.25547347  9.24455454 11.15494784 76.4926592
+  82.48651423]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.226872394166826
+| epoch  47 |    10 batches | ms/batch 53.65646 | train loss 0.00758
+| epoch  47 |    20 batches | ms/batch 51.96114 | train loss 0.01036
+| epoch  47 |    30 batches | ms/batch 52.75905 | train loss 0.00830
+| epoch  47 |    40 batches | ms/batch 57.94482 | train loss 0.01196
+| epoch  47 |    50 batches | ms/batch 52.65911 | train loss 0.01052
+Precision per label/weight
+[[0.22222222 0.63636364 0.63636364 0.35714286 0.15384615 0.08333333
+  0.28571429]]
+false positives per label/weight
+[[7. 4. 5. 8. 8. 8. 7.]]
+false negatives per label/weight
+[[0. 0. 3. 1. 3. 3. 8.]]
+RMSE per label/weight
+[[ 9.84706577  6.34574774  5.81039068  8.15926477 14.75828039 73.74120967
+  78.49789512]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.333339794841784
+RMSE improved... (44.66658710686763->44.333339794841784)
+| epoch  48 |    10 batches | ms/batch 59.93974 | train loss 0.00971
+| epoch  48 |    20 batches | ms/batch 49.06862 | train loss 0.00630
+| epoch  48 |    30 batches | ms/batch 53.15781 | train loss 0.00614
+| epoch  48 |    40 batches | ms/batch 51.56214 | train loss 0.01016
+| epoch  48 |    50 batches | ms/batch 53.95570 | train loss 0.01121
+Precision per label/weight
+[[0.11111111 0.54545455 0.40909091 0.28571429 0.23076923 0.
+  0.14285714]]
+false positives per label/weight
+[[ 8.  5. 11.  9.  9.  9. 14.]]
+false negatives per label/weight
+[[0. 0. 2. 1. 1. 3. 4.]]
+RMSE per label/weight
+[[10.63692688  7.47959897  7.42157709 11.14019243 17.92435503 74.85805854
+  77.54134315]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.53134762909192
+| epoch  49 |    10 batches | ms/batch 54.75340 | train loss 0.00334
+| epoch  49 |    20 batches | ms/batch 53.85618 | train loss 0.00442
+| epoch  49 |    30 batches | ms/batch 54.25470 | train loss 0.00708
+| epoch  49 |    40 batches | ms/batch 50.06628 | train loss 0.01167
+| epoch  49 |    50 batches | ms/batch 51.26278 | train loss 0.01017
+Precision per label/weight
+[[0.11111111 0.72727273 0.45454545 0.57142857 0.38461538 0.41666667
+  0.04761905]]
+false positives per label/weight
+[[8. 3. 1. 0. 3. 2. 3.]]
+false negatives per label/weight
+[[ 0.  0. 11.  6.  5.  5. 17.]]
+RMSE per label/weight
+[[ 8.15465416  4.36497402  7.15824727  9.37031772 11.88323536 75.69159119
+  84.36842644]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.78167992812469
+| epoch  50 |    10 batches | ms/batch 48.17159 | train loss 0.01822
+| epoch  50 |    20 batches | ms/batch 53.25716 | train loss 0.01533
+| epoch  50 |    30 batches | ms/batch 48.86928 | train loss 0.01268
+| epoch  50 |    40 batches | ms/batch 53.85590 | train loss 0.01065
+| epoch  50 |    50 batches | ms/batch 52.06082 | train loss 0.01027
+Precision per label/weight
+[[0.22222222 0.72727273 0.54545455 0.64285714 0.38461538 0.33333333
+  0.14285714]]
+false positives per label/weight
+[[7. 3. 1. 0. 4. 5. 3.]]
+false negatives per label/weight
+[[ 0.  0.  9.  5.  4.  3. 15.]]
+RMSE per label/weight
+[[ 7.96350035  4.31028136  6.57936652  7.28233257 11.85222916 75.0538919
+  80.35611964]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.10253625678436
+| epoch  51 |    10 batches | ms/batch 49.86663 | train loss 0.00445
+| epoch  51 |    20 batches | ms/batch 52.65934 | train loss 0.00802
+| epoch  51 |    30 batches | ms/batch 51.46239 | train loss 0.00972
+| epoch  51 |    40 batches | ms/batch 55.55127 | train loss 0.00892
+| epoch  51 |    50 batches | ms/batch 57.74560 | train loss 0.01028
+Precision per label/weight
+[[0.33333333 0.54545455 0.68181818 0.35714286 0.15384615 0.08333333
+  0.14285714]]
+false positives per label/weight
+[[ 6.  3.  1.  7.  9.  8. 12.]]
+false negatives per label/weight
+[[0. 2. 6. 2. 2. 3. 6.]]
+RMSE per label/weight
+[[ 8.07786659  5.76462826  6.39503842  8.09959952 16.55625572 74.4063659
+  78.84180193]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.64530329635348
+| epoch  52 |    10 batches | ms/batch 53.85554 | train loss 0.00828
+| epoch  52 |    20 batches | ms/batch 55.95040 | train loss 0.00994
+| epoch  52 |    30 batches | ms/batch 54.65393 | train loss 0.00889
+| epoch  52 |    40 batches | ms/batch 52.89624 | train loss 0.00936
+| epoch  52 |    50 batches | ms/batch 54.75359 | train loss 0.00933
+Precision per label/weight
+[[0.         0.45454545 0.31818182 0.28571429 0.23076923 0.
+  0.14285714]]
+false positives per label/weight
+[[ 9.  6. 14. 10. 10.  9. 15.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 3. 3.]]
+RMSE per label/weight
+[[10.82207682  7.75363118  9.1189301  13.8121418  21.48549897 75.02392194
+  77.66563307]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.98701324517308
+| epoch  53 |    10 batches | ms/batch 65.74180 | train loss 0.01618
+| epoch  53 |    20 batches | ms/batch 55.45166 | train loss 0.01355
+| epoch  53 |    30 batches | ms/batch 59.29248 | train loss 0.01159
+| epoch  53 |    40 batches | ms/batch 51.66185 | train loss 0.01238
+| epoch  53 |    50 batches | ms/batch 61.53543 | train loss 0.01042
+Precision per label/weight
+[[0.33333333 0.54545455 0.59090909 0.35714286 0.23076923 0.
+  0.14285714]]
+false positives per label/weight
+[[ 6.  3.  1.  4.  6.  9. 10.]]
+false negatives per label/weight
+[[0. 2. 8. 5. 4. 3. 8.]]
+RMSE per label/weight
+[[ 6.40727721  4.20841561  6.64524593  6.52938705 13.77158841 74.71364814
+  77.63580921]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.07629809981272
+RMSE improved... (44.333339794841784->44.07629809981272)
+| epoch  54 |    10 batches | ms/batch 56.94768 | train loss 0.00343
+| epoch  54 |    20 batches | ms/batch 52.36018 | train loss 0.00365
+| epoch  54 |    30 batches | ms/batch 56.84800 | train loss 0.00534
+| epoch  54 |    40 batches | ms/batch 58.89373 | train loss 0.01015
+| epoch  54 |    50 batches | ms/batch 57.14691 | train loss 0.01122
+Precision per label/weight
+[[0.11111111 0.63636364 0.59090909 0.28571429 0.15384615 0.
+  0.14285714]]
+false positives per label/weight
+[[ 8.  4.  6.  8.  9.  9. 11.]]
+false negatives per label/weight
+[[0. 0. 3. 2. 2. 3. 7.]]
+RMSE per label/weight
+[[10.29518541  6.41409161  6.40371991  8.4450146  15.75376401 74.35512105
+  76.06875932]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.65565220641217
+RMSE improved... (44.07629809981272->43.65565220641217)
+| epoch  55 |    10 batches | ms/batch 57.09825 | train loss 0.01109
+| epoch  55 |    20 batches | ms/batch 50.16587 | train loss 0.01135
+| epoch  55 |    30 batches | ms/batch 54.55408 | train loss 0.00858
+| epoch  55 |    40 batches | ms/batch 50.96371 | train loss 0.00830
+| epoch  55 |    50 batches | ms/batch 53.27804 | train loss 0.00833
+Precision per label/weight
+[[0.66666667 0.63636364 0.         0.07142857 0.23076923 0.08333333
+  0.19047619]]
+false positives per label/weight
+[[2. 0. 0. 0. 1. 7. 5.]]
+false negatives per label/weight
+[[ 1.  4. 22. 13.  9.  4. 12.]]
+RMSE per label/weight
+[[ 4.86489005  6.86309054 14.46083323 15.87647453 16.73384481 76.2417043
+  80.66918314]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.3270825980033
+| epoch  56 |    10 batches | ms/batch 49.46766 | train loss 0.00869
+| epoch  56 |    20 batches | ms/batch 58.44378 | train loss 0.00642
+| epoch  56 |    30 batches | ms/batch 55.76854 | train loss 0.01202
+| epoch  56 |    40 batches | ms/batch 56.44913 | train loss 0.01232
+| epoch  56 |    50 batches | ms/batch 51.56214 | train loss 0.01101
+Precision per label/weight
+[[0.22222222 0.72727273 0.5        0.64285714 0.38461538 0.41666667
+  0.04761905]]
+false positives per label/weight
+[[7. 3. 1. 0. 4. 3. 3.]]
+false negatives per label/weight
+[[ 0.  0. 10.  5.  4.  4. 17.]]
+RMSE per label/weight
+[[ 8.50367389  4.24149233  7.00486104  7.20194177 13.30120412 73.83278438
+  81.26630153]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.272394341972166
+| epoch  57 |    10 batches | ms/batch 49.69327 | train loss 0.01660
+| epoch  57 |    20 batches | ms/batch 48.79484 | train loss 0.01184
+| epoch  57 |    30 batches | ms/batch 44.28153 | train loss 0.01199
+| epoch  57 |    40 batches | ms/batch 47.97189 | train loss 0.00980
+| epoch  57 |    50 batches | ms/batch 50.60301 | train loss 0.00981
+Precision per label/weight
+[[0.11111111 0.63636364 0.59090909 0.28571429 0.23076923 0.33333333
+  0.0952381 ]]
+false positives per label/weight
+[[8. 4. 3. 7. 7. 4. 4.]]
+false negatives per label/weight
+[[ 0.  0.  6.  3.  3.  4. 15.]]
+RMSE per label/weight
+[[ 9.37651363  5.26180094  6.31828963  7.02589102 15.3218021  72.67856657
+  80.25472728]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.760840307627845
+| epoch  58 |    10 batches | ms/batch 52.16048 | train loss 0.00450
+| epoch  58 |    20 batches | ms/batch 48.27080 | train loss 0.01043
+| epoch  58 |    30 batches | ms/batch 50.06616 | train loss 0.01027
+| epoch  58 |    40 batches | ms/batch 52.95796 | train loss 0.01004
+| epoch  58 |    50 batches | ms/batch 50.76437 | train loss 0.01071
+Precision per label/weight
+[[0.11111111 0.63636364 0.59090909 0.28571429 0.23076923 0.41666667
+  0.        ]]
+false positives per label/weight
+[[8. 4. 3. 7. 7. 2. 3.]]
+false negatives per label/weight
+[[ 0.  0.  6.  3.  3.  5. 18.]]
+RMSE per label/weight
+[[ 9.30919983  5.13447837  5.97913464  6.79861375 14.89469475 72.45824731
+  83.01452232]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.708970155057855
+| epoch  59 |    10 batches | ms/batch 64.62731 | train loss 0.00788
+| epoch  59 |    20 batches | ms/batch 59.54068 | train loss 0.00542
+| epoch  59 |    30 batches | ms/batch 56.24967 | train loss 0.00663
+| epoch  59 |    40 batches | ms/batch 47.57268 | train loss 0.00796
+| epoch  59 |    50 batches | ms/batch 49.16840 | train loss 0.01101
+Precision per label/weight
+[[0.         0.09090909 0.31818182 0.21428571 0.23076923 0.
+  0.23809524]]
+false positives per label/weight
+[[ 9. 10. 14. 11. 10.  9.  7.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 0. 3. 9.]]
+RMSE per label/weight
+[[12.39397261  9.03655154  9.63343464 13.81991435 22.12850321 71.04988246
+  75.63015318]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.61792043983951
+RMSE improved... (43.65565220641217->43.61792043983951)
+| epoch  60 |    10 batches | ms/batch 49.46775 | train loss 0.00459
+| epoch  60 |    20 batches | ms/batch 50.26548 | train loss 0.00855
+| epoch  60 |    30 batches | ms/batch 49.46787 | train loss 0.01073
+| epoch  60 |    40 batches | ms/batch 50.76444 | train loss 0.00904
+| epoch  60 |    50 batches | ms/batch 53.96950 | train loss 0.00972
+Precision per label/weight
+[[0.11111111 0.45454545 0.54545455 0.35714286 0.30769231 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 8.  6.  6.  6.  7.  9. 10.]]
+false negatives per label/weight
+[[0. 0. 4. 3. 2. 3. 9.]]
+RMSE per label/weight
+[[10.08516466  8.26953052  7.38661165  9.17055805 15.21552163 74.59066448
+  73.18179882]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.7357747495651
+RMSE improved... (43.61792043983951->42.7357747495651)
+| epoch  61 |    10 batches | ms/batch 50.66459 | train loss 0.01142
+| epoch  61 |    20 batches | ms/batch 56.84786 | train loss 0.00734
+| epoch  61 |    30 batches | ms/batch 53.87783 | train loss 0.00626
+| epoch  61 |    40 batches | ms/batch 54.65817 | train loss 0.00765
+| epoch  61 |    50 batches | ms/batch 49.76690 | train loss 0.00886
+Precision per label/weight
+[[0.11111111 0.72727273 0.59090909 0.42857143 0.23076923 0.33333333
+  0.14285714]]
+false positives per label/weight
+[[8. 3. 1. 3. 6. 5. 3.]]
+false negatives per label/weight
+[[ 0.  0.  8.  5.  4.  3. 15.]]
+RMSE per label/weight
+[[ 7.6568933   3.72157652  6.22415081  7.01364502 13.79258214 73.37768003
+  78.86046781]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.2701011334852
+| epoch  62 |    10 batches | ms/batch 52.55933 | train loss 0.00346
+| epoch  62 |    20 batches | ms/batch 51.76160 | train loss 0.00774
+| epoch  62 |    30 batches | ms/batch 51.66173 | train loss 0.00861
+| epoch  62 |    40 batches | ms/batch 51.06368 | train loss 0.01038
+| epoch  62 |    50 batches | ms/batch 50.36533 | train loss 0.01037
+Precision per label/weight
+[[0.33333333 0.54545455 0.63636364 0.42857143 0.15384615 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 6.  3.  1.  4.  8.  9. 11.]]
+false negatives per label/weight
+[[0. 2. 7. 4. 3. 3. 8.]]
+RMSE per label/weight
+[[ 7.24799605  4.37511541  6.05829299  6.87384166 15.89642496 73.7434821
+  75.65493029]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.26068076210863
+| epoch  63 |    10 batches | ms/batch 52.65925 | train loss 0.00685
+| epoch  63 |    20 batches | ms/batch 51.76146 | train loss 0.00829
+| epoch  63 |    30 batches | ms/batch 48.76971 | train loss 0.01284
+| epoch  63 |    40 batches | ms/batch 49.06876 | train loss 0.01068
+| epoch  63 |    50 batches | ms/batch 52.55933 | train loss 0.00899
+Precision per label/weight
+[[0.33333333 0.63636364 0.59090909 0.5        0.23076923 0.08333333
+  0.19047619]]
+false positives per label/weight
+[[6. 3. 1. 2. 6. 8. 6.]]
+false negatives per label/weight
+[[ 0.  1.  8.  5.  4.  3. 11.]]
+RMSE per label/weight
+[[ 7.59127397  3.859854    6.49381222  6.87583486 14.66607137 72.97649664
+  76.53087459]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.38288912709213
+| epoch  64 |    10 batches | ms/batch 49.16856 | train loss 0.00881
+| epoch  64 |    20 batches | ms/batch 48.76957 | train loss 0.00764
+| epoch  64 |    30 batches | ms/batch 47.57268 | train loss 0.00631
+| epoch  64 |    40 batches | ms/batch 45.57807 | train loss 0.00717
+| epoch  64 |    50 batches | ms/batch 44.78021 | train loss 0.00662
+Precision per label/weight
+[[0.33333333 0.90909091 0.13636364 0.14285714 0.38461538 0.5
+  0.04761905]]
+false positives per label/weight
+[[6. 0. 0. 0. 1. 2. 3.]]
+false negatives per label/weight
+[[ 0.  1. 19. 12.  7.  4. 17.]]
+RMSE per label/weight
+[[ 6.01980396  3.20379508 10.54317326 13.26770915 15.15572448 74.59419484
+  82.05742757]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.07202488781594
+| epoch  65 |    10 batches | ms/batch 46.27628 | train loss 0.00853
+| epoch  65 |    20 batches | ms/batch 44.28160 | train loss 0.00865
+| epoch  65 |    30 batches | ms/batch 45.47832 | train loss 0.01032
+| epoch  65 |    40 batches | ms/batch 48.37062 | train loss 0.00838
+| epoch  65 |    50 batches | ms/batch 48.27089 | train loss 0.00811
+Precision per label/weight
+[[0.33333333 0.72727273 0.54545455 0.57142857 0.23076923 0.
+  0.14285714]]
+false positives per label/weight
+[[ 6.  3.  3.  5.  8.  9. 13.]]
+false negatives per label/weight
+[[0. 0. 7. 1. 2. 3. 5.]]
+RMSE per label/weight
+[[ 8.20880752  3.9820349   6.02151279  7.1514455  16.92511983 73.64300927
+  76.01456261]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.435839004190804
+| epoch  66 |    10 batches | ms/batch 51.96104 | train loss 0.01558
+| epoch  66 |    20 batches | ms/batch 55.55141 | train loss 0.00850
+| epoch  66 |    30 batches | ms/batch 58.51009 | train loss 0.00926
+| epoch  66 |    40 batches | ms/batch 64.12864 | train loss 0.00775
+| epoch  66 |    50 batches | ms/batch 57.44619 | train loss 0.00710
+Precision per label/weight
+[[0.         0.36363636 0.36363636 0.35714286 0.23076923 0.
+  0.23809524]]
+false positives per label/weight
+[[ 9.  7. 13.  9.  9.  9.  7.]]
+false negatives per label/weight
+[[0. 0. 1. 0. 1. 3. 9.]]
+RMSE per label/weight
+[[11.6466165   7.43688739  6.94494421 11.96201308 20.55495278 71.24823383
+  74.259462  ]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.829537867231565
+| epoch  67 |    10 batches | ms/batch 54.85325 | train loss 0.00217
+| epoch  67 |    20 batches | ms/batch 52.75886 | train loss 0.00490
+| epoch  67 |    30 batches | ms/batch 49.46787 | train loss 0.00487
+| epoch  67 |    40 batches | ms/batch 52.55935 | train loss 0.00808
+| epoch  67 |    50 batches | ms/batch 49.16842 | train loss 0.00834
+Precision per label/weight
+[[0.         0.09090909 0.13636364 0.07142857 0.07692308 0.
+  0.04761905]]
+false positives per label/weight
+[[ 9. 10. 19. 13. 12.  9. 13.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 3. 7.]]
+RMSE per label/weight
+[[17.22256504 14.01919967 14.00065364 19.64701409 26.43620383 72.89101348
+  71.64660493]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.744853440386294
+| epoch  68 |    10 batches | ms/batch 58.04493 | train loss 0.01630
+| epoch  68 |    20 batches | ms/batch 55.35173 | train loss 0.01041
+| epoch  68 |    30 batches | ms/batch 56.44901 | train loss 0.01086
+| epoch  68 |    40 batches | ms/batch 51.46246 | train loss 0.00887
+| epoch  68 |    50 batches | ms/batch 48.07124 | train loss 0.01017
+Precision per label/weight
+[[0.         0.72727273 0.59090909 0.5        0.15384615 0.16666667
+  0.0952381 ]]
+false positives per label/weight
+[[9. 3. 1. 1. 6. 7. 4.]]
+false negatives per label/weight
+[[ 0.  0.  8.  6.  5.  3. 15.]]
+RMSE per label/weight
+[[ 7.70887111  3.56471477  5.92463302  7.57253802 13.99199476 72.79532179
+  77.70878796]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.745746880143194
+| epoch  69 |    10 batches | ms/batch 50.86403 | train loss 0.00481
+| epoch  69 |    20 batches | ms/batch 50.96366 | train loss 0.01085
+| epoch  69 |    30 batches | ms/batch 55.95021 | train loss 0.01078
+| epoch  69 |    40 batches | ms/batch 56.04999 | train loss 0.01061
+| epoch  69 |    50 batches | ms/batch 52.65920 | train loss 0.00909
+Precision per label/weight
+[[0.11111111 0.54545455 0.36363636 0.42857143 0.38461538 0.
+  0.19047619]]
+false positives per label/weight
+[[8. 5. 2. 2. 3. 9. 7.]]
+false negatives per label/weight
+[[ 0.  0. 12.  6.  5.  3. 10.]]
+RMSE per label/weight
+[[ 8.85033525  5.75330828  7.63728549  9.45084144 13.346857   74.97951896
+  72.85156125]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.56897849842615
+RMSE improved... (42.7357747495651->42.56897849842615)
+| epoch  70 |    10 batches | ms/batch 52.45960 | train loss 0.00663
+| epoch  70 |    20 batches | ms/batch 51.16315 | train loss 0.00562
+| epoch  70 |    30 batches | ms/batch 52.36006 | train loss 0.00558
+| epoch  70 |    40 batches | ms/batch 49.96622 | train loss 0.00787
+| epoch  70 |    50 batches | ms/batch 48.37062 | train loss 0.00785
+Precision per label/weight
+[[0.11111111 0.72727273 0.63636364 0.42857143 0.15384615 0.25
+  0.14285714]]
+false positives per label/weight
+[[8. 3. 3. 5. 7. 6. 4.]]
+false negatives per label/weight
+[[ 0.  0.  5.  3.  4.  3. 14.]]
+RMSE per label/weight
+[[ 8.02417451  4.4036173   5.52248017  7.5647618  15.63305375 72.04632133
+  75.79501816]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.97430340637501
+| epoch  71 |    10 batches | ms/batch 49.16832 | train loss 0.00274
+| epoch  71 |    20 batches | ms/batch 49.66722 | train loss 0.00353
+| epoch  71 |    30 batches | ms/batch 51.96109 | train loss 0.00593
+| epoch  71 |    40 batches | ms/batch 54.35464 | train loss 0.00492
+| epoch  71 |    50 batches | ms/batch 56.54876 | train loss 0.00603
+Precision per label/weight
+[[0.         0.18181818 0.13636364 0.         0.15384615 0.08333333
+  0.19047619]]
+false positives per label/weight
+[[ 9.  9. 19. 14. 11.  8.  8.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 3. 9.]]
+RMSE per label/weight
+[[15.11010165 11.33087331 12.487074   20.72310925 29.75607781 68.8104045
+  74.30968225]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.96960290159081
+| epoch  72 |    10 batches | ms/batch 49.36788 | train loss 0.00681
+| epoch  72 |    20 batches | ms/batch 45.77746 | train loss 0.01061
+| epoch  72 |    30 batches | ms/batch 50.56477 | train loss 0.01014
+| epoch  72 |    40 batches | ms/batch 53.95565 | train loss 0.01067
+| epoch  72 |    50 batches | ms/batch 51.66190 | train loss 0.01001
+Precision per label/weight
+[[0.         0.45454545 0.54545455 0.42857143 0.23076923 0.08333333
+  0.23809524]]
+false positives per label/weight
+[[9. 6. 1. 2. 5. 8. 7.]]
+false negatives per label/weight
+[[0. 0. 9. 6. 5. 3. 9.]]
+RMSE per label/weight
+[[10.2710854   5.69944719  5.3302244   8.25193548 15.42837356 72.25209732
+  74.91446567]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.75783457263342
+| epoch  73 |    10 batches | ms/batch 47.47324 | train loss 0.00754
+| epoch  73 |    20 batches | ms/batch 48.77005 | train loss 0.00698
+| epoch  73 |    30 batches | ms/batch 50.76439 | train loss 0.00524
+| epoch  73 |    40 batches | ms/batch 49.24428 | train loss 0.00990
+| epoch  73 |    50 batches | ms/batch 49.46785 | train loss 0.00891
+Precision per label/weight
+[[0.22222222 0.63636364 0.04545455 0.07142857 0.15384615 0.41666667
+  0.04761905]]
+false positives per label/weight
+[[7. 1. 0. 0. 1. 1. 3.]]
+false negatives per label/weight
+[[ 0.  3. 21. 13. 10.  6. 17.]]
+RMSE per label/weight
+[[ 7.13296748  4.81136544 11.23471119 17.53315757 19.31848404 74.03278653
+  81.96636378]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.389569648701205
+| epoch  74 |    10 batches | ms/batch 49.41494 | train loss 0.00326
+| epoch  74 |    20 batches | ms/batch 48.37067 | train loss 0.00750
+| epoch  74 |    30 batches | ms/batch 49.56744 | train loss 0.01177
+| epoch  74 |    40 batches | ms/batch 50.36526 | train loss 0.00935
+| epoch  74 |    50 batches | ms/batch 50.26684 | train loss 0.00809
+Precision per label/weight
+[[0.         0.09090909 0.40909091 0.28571429 0.30769231 0.08333333
+  0.        ]]
+false positives per label/weight
+[[ 9. 10. 13. 10.  9.  9. 18.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 2. 3.]]
+RMSE per label/weight
+[[16.11146929 11.89501522  9.85388565 14.08158133 21.19883229 75.75938983
+  74.80131616]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 44.39359891547247
+| epoch  75 |    10 batches | ms/batch 47.87219 | train loss 0.00805
+| epoch  75 |    20 batches | ms/batch 48.86909 | train loss 0.01084
+| epoch  75 |    30 batches | ms/batch 48.56250 | train loss 0.00856
+| epoch  75 |    40 batches | ms/batch 48.89276 | train loss 0.00932
+| epoch  75 |    50 batches | ms/batch 46.87469 | train loss 0.00980
+Precision per label/weight
+[[0.         0.45454545 0.59090909 0.42857143 0.23076923 0.08333333
+  0.23809524]]
+false positives per label/weight
+[[9. 6. 3. 3. 6. 8. 5.]]
+false negatives per label/weight
+[[ 0.  0.  6.  5.  4.  3. 11.]]
+RMSE per label/weight
+[[11.61373664  7.04268501  6.181885    7.77684561 13.38290305 72.73086404
+  71.62710774]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.65591118320236
+RMSE improved... (42.56897849842615->41.65591118320236)
+| epoch  76 |    10 batches | ms/batch 47.55151 | train loss 0.00704
+| epoch  76 |    20 batches | ms/batch 48.57135 | train loss 0.01081
+| epoch  76 |    30 batches | ms/batch 52.45969 | train loss 0.00956
+| epoch  76 |    40 batches | ms/batch 46.66872 | train loss 0.00870
+| epoch  76 |    50 batches | ms/batch 44.48102 | train loss 0.00750
+Precision per label/weight
+[[0.         0.81818182 0.5        0.5        0.15384615 0.08333333
+  0.23809524]]
+false positives per label/weight
+[[9. 2. 1. 2. 6. 8. 5.]]
+false negatives per label/weight
+[[ 0.  0. 10.  5.  5.  3. 11.]]
+RMSE per label/weight
+[[ 8.16902989  4.13290529  6.66033268  8.21170696 14.14214644 72.89602956
+  71.66298536]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.64764526443787
+RMSE improved... (41.65591118320236->41.64764526443787)
+| epoch  77 |    10 batches | ms/batch 52.06072 | train loss 0.00552
+| epoch  77 |    20 batches | ms/batch 48.16296 | train loss 0.01340
+| epoch  77 |    30 batches | ms/batch 48.17123 | train loss 0.01131
+| epoch  77 |    40 batches | ms/batch 50.37148 | train loss 0.01001
+| epoch  77 |    50 batches | ms/batch 51.06347 | train loss 0.00907
+Precision per label/weight
+[[0.11111111 0.72727273 0.45454545 0.5        0.15384615 0.08333333
+  0.23809524]]
+false positives per label/weight
+[[8. 3. 1. 1. 6. 8. 6.]]
+false negatives per label/weight
+[[ 0.  0. 11.  6.  5.  3. 10.]]
+RMSE per label/weight
+[[ 8.64589085  4.3013495   6.14480382  8.20166657 14.68060972 72.48681319
+  72.83118457]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.99609506172889
+| epoch  78 |    10 batches | ms/batch 51.46229 | train loss 0.00356
+| epoch  78 |    20 batches | ms/batch 49.56748 | train loss 0.00564
+| epoch  78 |    30 batches | ms/batch 48.17131 | train loss 0.00746
+| epoch  78 |    40 batches | ms/batch 48.36533 | train loss 0.00666
+| epoch  78 |    50 batches | ms/batch 48.37070 | train loss 0.00650
+Precision per label/weight
+[[0.         0.09090909 0.31818182 0.07142857 0.15384615 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 9. 10. 15. 13. 11.  9. 10.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 3. 9.]]
+RMSE per label/weight
+[[15.55821921 10.8874571   9.85401397 16.39154473 25.82521875 69.13274615
+  70.96756003]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.14433546124664
+| epoch  79 |    10 batches | ms/batch 47.77219 | train loss 0.00348
+| epoch  79 |    20 batches | ms/batch 47.87323 | train loss 0.00682
+| epoch  79 |    30 batches | ms/batch 49.96634 | train loss 0.00967
+| epoch  79 |    40 batches | ms/batch 47.30558 | train loss 0.00864
+| epoch  79 |    50 batches | ms/batch 45.27953 | train loss 0.00940
+Precision per label/weight
+[[0.         0.45454545 0.77272727 0.5        0.15384615 0.25
+  0.04761905]]
+false positives per label/weight
+[[9. 6. 2. 4. 7. 6. 4.]]
+false negatives per label/weight
+[[ 0.  0.  3.  3.  4.  3. 16.]]
+RMSE per label/weight
+[[11.1751111   6.14576412  4.49431293  7.08388101 15.66753799 70.07436061
+  74.71725558]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.24560485261318
+| epoch  80 |    10 batches | ms/batch 46.57545 | train loss 0.00402
+| epoch  80 |    20 batches | ms/batch 45.07937 | train loss 0.00654
+| epoch  80 |    30 batches | ms/batch 44.38128 | train loss 0.00620
+| epoch  80 |    40 batches | ms/batch 46.77484 | train loss 0.00666
+| epoch  80 |    50 batches | ms/batch 47.97184 | train loss 0.00859
+Precision per label/weight
+[[0.11111111 0.54545455 0.72727273 0.35714286 0.07692308 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 8.  5.  3.  6.  8.  9. 10.]]
+false negatives per label/weight
+[[0. 0. 3. 3. 4. 3. 9.]]
+RMSE per label/weight
+[[10.3142086   5.75862069  4.67113541  7.79296634 17.76778102 71.25295168
+  70.45106321]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.05361118133157
+RMSE improved... (41.64764526443787->41.05361118133157)
+| epoch  81 |    10 batches | ms/batch 47.37318 | train loss 0.00656
+| epoch  81 |    20 batches | ms/batch 49.16852 | train loss 0.00517
+| epoch  81 |    30 batches | ms/batch 47.47283 | train loss 0.00962
+| epoch  81 |    40 batches | ms/batch 51.56212 | train loss 0.00908
+| epoch  81 |    50 batches | ms/batch 49.17021 | train loss 0.00974
+Precision per label/weight
+[[0.11111111 0.81818182 0.36363636 0.42857143 0.46153846 0.33333333
+  0.04761905]]
+false positives per label/weight
+[[8. 2. 0. 0. 2. 2. 2.]]
+false negatives per label/weight
+[[ 0.  0. 14.  8.  5.  6. 18.]]
+RMSE per label/weight
+[[ 7.98407146  3.27347189  7.30368169 10.1820286  14.6809378  72.05373852
+  82.79143169]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.62874518213191
+| epoch  82 |    10 batches | ms/batch 49.76697 | train loss 0.00359
+| epoch  82 |    20 batches | ms/batch 51.86274 | train loss 0.00281
+| epoch  82 |    30 batches | ms/batch 55.55158 | train loss 0.00265
+| epoch  82 |    40 batches | ms/batch 56.18637 | train loss 0.00333
+| epoch  82 |    50 batches | ms/batch 56.44898 | train loss 0.00789
+Precision per label/weight
+[[0.         0.36363636 0.72727273 0.35714286 0.         0.25
+  0.        ]]
+false positives per label/weight
+[[9. 7. 4. 6. 8. 6. 4.]]
+false negatives per label/weight
+[[ 0.  0.  2.  3.  5.  3. 17.]]
+RMSE per label/weight
+[[11.60284716  6.65290796  4.84413786  7.57620042 17.01641286 69.32569963
+  74.68402401]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.19318288608812
+| epoch  83 |    10 batches | ms/batch 58.44355 | train loss 0.00654
+| epoch  83 |    20 batches | ms/batch 52.45988 | train loss 0.01154
+| epoch  83 |    30 batches | ms/batch 55.65107 | train loss 0.00919
+| epoch  83 |    40 batches | ms/batch 64.56378 | train loss 0.00878
+| epoch  83 |    50 batches | ms/batch 59.64043 | train loss 0.00865
+Precision per label/weight
+[[0.         0.45454545 0.63636364 0.35714286 0.23076923 0.08333333
+  0.14285714]]
+false positives per label/weight
+[[ 9.  6.  6.  8.  8.  9. 15.]]
+false negatives per label/weight
+[[0. 0. 2. 1. 2. 2. 3.]]
+RMSE per label/weight
+[[11.26546708  6.27045906  4.95976058  9.04810127 19.77216603 74.89880031
+  71.44131828]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 42.338887760053765
+| epoch  84 |    10 batches | ms/batch 53.08878 | train loss 0.00872
+| epoch  84 |    20 batches | ms/batch 52.26045 | train loss 0.01376
+| epoch  84 |    30 batches | ms/batch 53.15993 | train loss 0.01131
+| epoch  84 |    40 batches | ms/batch 59.83994 | train loss 0.00969
+| epoch  84 |    50 batches | ms/batch 60.70983 | train loss 0.01003
+Precision per label/weight
+[[0.         0.09090909 0.54545455 0.35714286 0.38461538 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 9. 10. 10.  9.  8.  9.  4.]]
+false negatives per label/weight
+[[ 0.  0.  0.  0.  0.  3. 15.]]
+RMSE per label/weight
+[[14.87703769 10.11943733  8.72375731 12.97749561 22.20222763 69.04536918
+  69.62705966]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.13253443564426
+| epoch  85 |    10 batches | ms/batch 59.78937 | train loss 0.01287
+| epoch  85 |    20 batches | ms/batch 70.66827 | train loss 0.00817
+| epoch  85 |    30 batches | ms/batch 62.58419 | train loss 0.00928
+| epoch  85 |    40 batches | ms/batch 62.73203 | train loss 0.01036
+| epoch  85 |    50 batches | ms/batch 56.74832 | train loss 0.00879
+Precision per label/weight
+[[0.22222222 0.27272727 0.68181818 0.14285714 0.07692308 0.08333333
+  0.14285714]]
+false positives per label/weight
+[[7. 5. 0. 4. 7. 8. 5.]]
+false negatives per label/weight
+[[ 0.  3.  7.  8.  5.  3. 13.]]
+RMSE per label/weight
+[[10.46573068  8.05722988  6.46435419  8.91487719 18.12946587 70.01504077
+  73.22940918]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.9434059365068
+| epoch  86 |    10 batches | ms/batch 64.52751 | train loss 0.02066
+| epoch  86 |    20 batches | ms/batch 61.33585 | train loss 0.01385
+| epoch  86 |    30 batches | ms/batch 65.20984 | train loss 0.01172
+| epoch  86 |    40 batches | ms/batch 68.60487 | train loss 0.00974
+| epoch  86 |    50 batches | ms/batch 65.67585 | train loss 0.00883
+Precision per label/weight
+[[0.         0.45454545 0.31818182 0.28571429 0.46153846 0.41666667
+  0.        ]]
+false positives per label/weight
+[[9. 6. 1. 0. 1. 1. 2.]]
+false negatives per label/weight
+[[ 0.  0. 14. 10.  6.  6. 19.]]
+RMSE per label/weight
+[[ 9.70957115  4.90526195  6.35515931 11.39658956 16.17317108 71.39051371
+  83.9763886 ]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.06819893600179
+| epoch  87 |    10 batches | ms/batch 68.41743 | train loss 0.01315
+| epoch  87 |    20 batches | ms/batch 64.44247 | train loss 0.00843
+| epoch  87 |    30 batches | ms/batch 64.27717 | train loss 0.00658
+| epoch  87 |    40 batches | ms/batch 62.87279 | train loss 0.01075
+| epoch  87 |    50 batches | ms/batch 69.62676 | train loss 0.00940
+Precision per label/weight
+[[0.11111111 0.45454545 0.72727273 0.35714286 0.07692308 0.
+  0.04761905]]
+false positives per label/weight
+[[ 8.  6.  3.  5.  8.  9. 12.]]
+false negatives per label/weight
+[[0. 0. 3. 4. 4. 3. 8.]]
+RMSE per label/weight
+[[11.35147463  6.13955154  4.56272888  7.29540524 17.35307872 71.26648543
+  69.15421863]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.59212671728737
+RMSE improved... (41.05361118133157->40.59212671728737)
+| epoch  88 |    10 batches | ms/batch 53.28932 | train loss 0.01064
+| epoch  88 |    20 batches | ms/batch 52.06058 | train loss 0.00932
+| epoch  88 |    30 batches | ms/batch 59.04210 | train loss 0.00832
+| epoch  88 |    40 batches | ms/batch 60.83720 | train loss 0.00953
+| epoch  88 |    50 batches | ms/batch 58.74288 | train loss 0.00804
+Precision per label/weight
+[[0.         0.45454545 0.77272727 0.5        0.07692308 0.
+  0.0952381 ]]
+false positives per label/weight
+[[ 9.  6.  5.  6.  8.  9. 12.]]
+false negatives per label/weight
+[[0. 0. 0. 1. 4. 3. 7.]]
+RMSE per label/weight
+[[11.27775675  6.44988097  4.98495591  7.93816558 17.84351574 71.77964164
+  67.62288764]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.22340059082978
+RMSE improved... (40.59212671728737->40.22340059082978)
+| epoch  89 |    10 batches | ms/batch 64.79867 | train loss 0.00709
+| epoch  89 |    20 batches | ms/batch 59.07776 | train loss 0.00613
+| epoch  89 |    30 batches | ms/batch 58.04472 | train loss 0.01081
+| epoch  89 |    40 batches | ms/batch 56.94771 | train loss 0.00969
+| epoch  89 |    50 batches | ms/batch 63.13128 | train loss 0.00840
+Precision per label/weight
+[[0.11111111 0.54545455 0.59090909 0.42857143 0.30769231 0.
+  0.14285714]]
+false positives per label/weight
+[[8. 5. 2. 3. 5. 9. 5.]]
+false negatives per label/weight
+[[ 0.  0.  7.  5.  4.  3. 13.]]
+RMSE per label/weight
+[[ 8.58297465  5.16461071  6.55423512  8.45204593 14.83676656 71.51767472
+  69.69598099]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.72248877696701
+| epoch  90 |    10 batches | ms/batch 60.83722 | train loss 0.00182
+| epoch  90 |    20 batches | ms/batch 54.15516 | train loss 0.00235
+| epoch  90 |    30 batches | ms/batch 54.25491 | train loss 0.00439
+| epoch  90 |    40 batches | ms/batch 50.86393 | train loss 0.00409
+| epoch  90 |    50 batches | ms/batch 51.26343 | train loss 0.00643
+Precision per label/weight
+[[0.         0.09090909 0.18181818 0.21428571 0.07692308 0.
+  0.14285714]]
+false positives per label/weight
+[[ 9. 10. 18. 11. 12.  9. 11.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 3. 7.]]
+RMSE per label/weight
+[[17.50902173 14.59796549 14.33897544 16.79724993 25.95180618 69.93084684
+  65.6900296 ]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.020644417386116
+| epoch  91 |    10 batches | ms/batch 56.17385 | train loss 0.00177
+| epoch  91 |    20 batches | ms/batch 59.69176 | train loss 0.00884
+| epoch  91 |    30 batches | ms/batch 55.05290 | train loss 0.00832
+| epoch  91 |    40 batches | ms/batch 55.95040 | train loss 0.00738
+| epoch  91 |    50 batches | ms/batch 49.16825 | train loss 0.00796
+Precision per label/weight
+[[0.11111111 0.63636364 0.54545455 0.42857143 0.30769231 0.
+  0.04761905]]
+false positives per label/weight
+[[ 8.  4.  5.  6.  7.  9. 11.]]
+false negatives per label/weight
+[[0. 0. 5. 2. 2. 3. 9.]]
+RMSE per label/weight
+[[ 9.52649811  4.7587758   6.20042179  7.91756909 19.80376605 70.4972091
+  67.56596895]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.02381873885604
+RMSE improved... (40.22340059082978->40.02381873885604)
+| epoch  92 |    10 batches | ms/batch 47.67258 | train loss 0.00350
+| epoch  92 |    20 batches | ms/batch 49.56746 | train loss 0.00310
+| epoch  92 |    30 batches | ms/batch 46.17639 | train loss 0.00739
+| epoch  92 |    40 batches | ms/batch 45.57803 | train loss 0.00729
+| epoch  92 |    50 batches | ms/batch 51.66190 | train loss 0.00643
+Precision per label/weight
+[[0.         0.         0.27272727 0.07142857 0.15384615 0.08333333
+  0.04761905]]
+false positives per label/weight
+[[ 9. 11. 16. 13. 11.  9. 11.]]
+false negatives per label/weight
+[[0. 0. 0. 0. 0. 2. 9.]]
+RMSE per label/weight
+[[16.88062079 11.93008942 12.46682231 16.9065304  28.31198618 68.63486719
+  65.70164467]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.72279104125871
+| epoch  93 |    10 batches | ms/batch 52.55942 | train loss 0.01100
+| epoch  93 |    20 batches | ms/batch 53.95560 | train loss 0.00758
+| epoch  93 |    30 batches | ms/batch 54.55401 | train loss 0.00716
+| epoch  93 |    40 batches | ms/batch 48.17126 | train loss 0.00784
+| epoch  93 |    50 batches | ms/batch 51.46239 | train loss 0.00853
+Precision per label/weight
+[[0.11111111 0.72727273 0.5        0.42857143 0.23076923 0.41666667
+  0.        ]]
+false positives per label/weight
+[[8. 3. 2. 2. 5. 3. 4.]]
+false negatives per label/weight
+[[ 0.  0.  9.  6.  5.  4. 17.]]
+RMSE per label/weight
+[[ 8.75822029  3.87515777  5.54186298  7.84301772 15.78845248 70.34514743
+  73.47056562]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.817841790773905
+| epoch  94 |    10 batches | ms/batch 48.66989 | train loss 0.00769
+| epoch  94 |    20 batches | ms/batch 54.45433 | train loss 0.00673
+| epoch  94 |    30 batches | ms/batch 50.86389 | train loss 0.00743
+| epoch  94 |    40 batches | ms/batch 53.75626 | train loss 0.00873
+| epoch  94 |    50 batches | ms/batch 49.66722 | train loss 0.00869
+Precision per label/weight
+[[0.11111111 0.36363636 0.59090909 0.42857143 0.38461538 0.25
+  0.14285714]]
+false positives per label/weight
+[[8. 6. 4. 3. 4. 6. 4.]]
+false negatives per label/weight
+[[ 0.  1.  5.  5.  4.  3. 14.]]
+RMSE per label/weight
+[[10.1658468   7.16834417  6.9494729   8.57354162 14.73825148 71.23928897
+  67.11953902]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 39.84243922713443
+RMSE improved... (40.02381873885604->39.84243922713443)
+| epoch  95 |    10 batches | ms/batch 49.46756 | train loss 0.00409
+| epoch  95 |    20 batches | ms/batch 51.56202 | train loss 0.00655
+| epoch  95 |    30 batches | ms/batch 52.06077 | train loss 0.00505
+| epoch  95 |    40 batches | ms/batch 47.27724 | train loss 0.00800
+| epoch  95 |    50 batches | ms/batch 49.95332 | train loss 0.00907
+Precision per label/weight
+[[0.22222222 0.90909091 0.45454545 0.42857143 0.23076923 0.16666667
+  0.        ]]
+false positives per label/weight
+[[7. 1. 2. 1. 5. 1. 2.]]
+false negatives per label/weight
+[[ 0.  0. 10.  7.  5.  9. 19.]]
+RMSE per label/weight
+[[ 7.44525946  2.99187739  6.29926209  8.60023343 15.84972836 71.5335328
+  82.68146929]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 45.45380031832692
+| epoch  96 |    10 batches | ms/batch 49.56722 | train loss 0.00841
+| epoch  96 |    20 batches | ms/batch 46.57581 | train loss 0.01266
+| epoch  96 |    30 batches | ms/batch 50.36511 | train loss 0.00960
+| epoch  96 |    40 batches | ms/batch 52.95839 | train loss 0.00855
+| epoch  96 |    50 batches | ms/batch 49.26524 | train loss 0.00804
+Precision per label/weight
+[[0.         0.18181818 0.68181818 0.42857143 0.30769231 0.33333333
+  0.        ]]
+false positives per label/weight
+[[9. 9. 6. 6. 7. 4. 4.]]
+false negatives per label/weight
+[[ 0.  0.  1.  2.  2.  4. 17.]]
+RMSE per label/weight
+[[12.00016161  7.51189312  6.65587233  8.52189686 19.3456371  69.3838692
+  71.27967736]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 41.2119670086188
+| epoch  97 |    10 batches | ms/batch 48.27058 | train loss 0.00387
+| epoch  97 |    20 batches | ms/batch 51.56217 | train loss 0.00297
+| epoch  97 |    30 batches | ms/batch 48.67136 | train loss 0.00410
+| epoch  97 |    40 batches | ms/batch 47.47317 | train loss 0.00376
+| epoch  97 |    50 batches | ms/batch 53.45697 | train loss 0.00530
+Precision per label/weight
+[[0.         0.09090909 0.45454545 0.28571429 0.30769231 0.25
+  0.0952381 ]]
+false positives per label/weight
+[[ 9. 10. 12. 10.  8.  6.  4.]]
+false negatives per label/weight
+[[ 0.  0.  0.  0.  1.  3. 15.]]
+RMSE per label/weight
+[[12.90712181  8.47975897  8.47726582 12.84575193 23.6635335  68.95459662
+  67.93634432]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 40.516293866638236
+| epoch  98 |    10 batches | ms/batch 52.65911 | train loss 0.00982
+| epoch  98 |    20 batches | ms/batch 50.36535 | train loss 0.00790
+| epoch  98 |    30 batches | ms/batch 51.66326 | train loss 0.00621
+| epoch  98 |    40 batches | ms/batch 49.76709 | train loss 0.00639
+| epoch  98 |    50 batches | ms/batch 51.48044 | train loss 0.00846
+Precision per label/weight
+[[0.55555556 0.72727273 0.09090909 0.14285714 0.23076923 0.08333333
+  0.04761905]]
+false positives per label/weight
+[[4. 0. 0. 0. 2. 1. 1.]]
+false negatives per label/weight
+[[ 0.  3. 20. 12.  8. 10. 19.]]
+RMSE per label/weight
+[[ 5.0928203   5.81565579 11.42097877 13.97338646 18.55784966 72.5914042
+  82.75477569]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 46.20238677212154
+| epoch  99 |    10 batches | ms/batch 55.20837 | train loss 0.00390
+| epoch  99 |    20 batches | ms/batch 59.04257 | train loss 0.00420
+| epoch  99 |    30 batches | ms/batch 62.03396 | train loss 0.00482
+| epoch  99 |    40 batches | ms/batch 53.35777 | train loss 0.00423
+| epoch  99 |    50 batches | ms/batch 51.41318 | train loss 0.00776
+Precision per label/weight
+[[0.         0.         0.22727273 0.28571429 0.30769231 0.25
+  0.04761905]]
+false positives per label/weight
+[[ 9. 11. 17.  9.  8.  2.  1.]]
+false negatives per label/weight
+[[ 0.  0.  0.  1.  1.  7. 19.]]
+RMSE per label/weight
+[[18.43597976 13.68241186 10.29727463 10.48696891 18.05108471 67.86893592
+  76.99082817]]
+Counter
+[[ 9. 11. 22. 14. 13. 12. 21.]]
+metric_unscaled 43.49670574960955
+final_valoutput
+[[566.95870459  39.43670293  56.42565158 609.44144142  30.64198859
+  593.35644388 389.71789443  88.35528123 313.52696878  38.95361885
+   24.25982372  23.44024575  23.02517333  22.53805254  70.07043901
+   24.49664098 585.9363181   40.02731924  60.41359776  33.25476601
+   47.43776897 305.02995896  57.19634029  24.70493373 348.76724291
+   32.01647685 582.09171373  68.13934512 597.51192415  66.44287488
+  268.69292241  30.25819077 590.03844422  48.90648113 558.6152001
+  555.54688817  35.52830912  45.54493926  70.80333807  64.7400891
+  556.06341565  30.60165699 116.35358876 398.40288615 572.86272371
+   32.127485    40.16518673  39.29610259  33.77165585  79.9054869
+  625.82558107  37.47243525 583.45362484  78.2496966  588.26902616
+   33.45604546 621.49506056  73.88029072  63.55272645 306.74681664
+   30.31165492  62.51868362  24.27633189  35.34342027 570.95488167
+  325.36924201  46.83298802  62.51455954  35.76199017  65.8037899
+   75.9576728   78.80112772  29.45212927 314.72757506  39.78859093
+   54.63957329  26.44653909  28.30042952 645.10271633  40.49566707
+   17.77971315  71.60516441  29.94253185 554.66716599  53.88178742
+   27.47631117  76.08406103  29.3537112   23.91317493 282.12437955
+   18.88697233 304.05231157 313.90831631  65.82402202  26.4950908
+  561.76285303 309.63263392  69.53798898  37.12224045  85.91309536
+   53.85244868  66.25550555 595.          37.99999981  65.99999838
+  595.          16.         595.         595.          74.00000106
+  302.99999943  37.99999981  37.99999981  23.00000018  23.00000018
+   16.          74.00000106  16.         595.          37.99999981
+   65.99999838  37.99999981  65.99999838 302.99999943  74.00000106
+   16.         302.99999943  23.00000018 595.          65.99999838
+  595.          74.00000106 302.99999943  23.00000018 595.
+   37.99999981 595.         595.          23.00000018  37.99999981
+   65.99999838  65.99999838 595.          16.          74.00000106
+  595.         595.          23.00000018  37.99999981  37.99999981
+   37.99999981  74.00000106 595.          37.99999981 595.
+   65.99999838 595.          23.00000018 595.          65.99999838
+   74.00000106 302.99999943  37.99999981  65.99999838  23.00000018
+   37.99999981 595.         302.99999943  37.99999981  74.00000106
+   37.99999981 302.99999943  74.00000106  74.00000106  37.99999981
+  302.99999943  37.99999981  65.99999838  16.          37.99999981
+  595.          37.99999981  23.00000018  65.99999838  37.99999981
+  595.          37.99999981  16.          74.00000106  23.00000018
+   16.         302.99999943  16.         302.99999943 302.99999943
+   65.99999838  23.00000018 595.         302.99999943  74.00000106
+   37.99999981  74.00000106  65.99999838  65.99999838]]
+
+[Done] exited with code=0 in 340.092 seconds
+
+config = {
+
+    # network settings
+    'nb_conv_blocks': 2,
+    'conv_block_type': 'normal',
+    'nb_filters': 64,
+    'filter_width': 5,
+    'nb_units_lstm': 128,
+    'nb_layers_lstm': 1,
+    'drop_prob': 0.5,
+    'error_margins': 5,
+    # training settings
+    'epochs': 100,
+    'batch_size': 10,
+    'loss': 'cross_entropy',
+    'weighted': False,          #Always false
+    'weights_init': 'xavier_uniform',
+    'optimizer': 'adam',
+    'lr': 1e-4,
+    'weight_decay': 1e-6,
+    'shuffling': True,
+    'valid_type': 'split', #split   #trainValidSimply #other
+    'DL_mode': 'regression', # 'regression, 'classification'
+    ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
+    'valid_epoch':'best',
+    'no_lstm': False,
+    'batch_norm': False,
+    'dilation': 1,
+    'pooling': False,
+    'pool_type': 'max',
+    'pool_kernel_width': 2,
+    'reduce_layer': False,
+    'reduce_layer_output': 10,
+    'nb_classes': 7,
+    'seed': 11, #was seed 1
+    'gpu': 'cuda:0',
+    'verbose': False,
+    'print_freq': 10,
+    'save_gradient_plot': False,
+    'print_counts': False,
+    'adj_lr': False,    #no change
+    'adj_lr_patience': 5,
+    'early_stopping': False,
+    'es_patience': 5,
+    'save_test_preds': False
+}
+
