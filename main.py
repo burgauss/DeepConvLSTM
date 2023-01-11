@@ -88,23 +88,47 @@ def main_regression():
     #change the config to get same scaler
     if config['valid_type'] == 'validComplete':
         config['valid_type'] = 'other'      #change it temporally to get the split from where the scaler was obtained
-        X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+        if config['window_type'] == 'window1':
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
                             tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.15)
-        X_train_ss_, X_valid_ss_, x_mm_ = MinMaxNormalization(X_train, X_valid)             # Rescaling
-        y_train_ss_, y_valid_ss_, y_mm_ = MinMaxNormalization(y_train, y_valid)
-    
-    config['valid_type'] = 'validComplete'  #return to original state
-    X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+            _, _, x_mm_ = MinMaxNormalization(X_train, X_valid)             # keep training scalers
+            _, _, y_mm_ = MinMaxNormalization(y_train, y_valid)
+            #get a weighed size validation split
+            config['valid_type'] = 'validComplete'  #return to original state
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
                             tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.4)
-    
+        elif config['window_type'] == 'window2':
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                            tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.15)
+            _, _, x_mm_ = MinMaxNormalization(X_train, X_valid)             # Keep training scalers
+            _, _, y_mm_ = MinMaxNormalization(y_train, y_valid)
+            config['valid_type'] = 'validComplete'  #return to original state
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                            tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.4)
+        
+        elif config['window_type'] == 'window3':
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                            tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
+            _, _, x_mm_ = MinMaxNormalization(X_train, X_valid)             # Keep training scalers
+            _, _, y_mm_ = MinMaxNormalization(y_train, y_valid)
+            config['valid_type'] = 'validComplete'  #return to original state
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                            tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.4)
+    elif config['valid_type'] == 'split':
+        if config['window_type'] == 'window1':
+            #Train for LS1ON + 45 points window
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
+                            tStepLeftShift=0, tStepRightShift=45, testSizePerc=0.4)
+        elif config['window_type'] == 'window2':
+            #Training for PIB window
+             X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                                tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.15)
+        elif config['window_type'] == 'window3':
+            ## Training in Omega1 |- Omega2:=15
+            X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
+                                    tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
 
-    #Training for PIB window
-    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
-    #                         tStepLeftShift=-10, tStepRightShift=10, testSizePerc=0.15)
 
-    #Training in Omega1 |- Omega2:=15
-    # X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
-    #                         tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.15)
     # Observing the distribution of data from y_valid
 
     value, counts = np.unique(y_valid, return_counts=True)
@@ -127,7 +151,6 @@ def main_regression():
     #Adding two new parameters according to the shape of the datasets
     config['window_size'] = X_train_ss.shape[1]
     config['nb_channels'] = X_train_ss.shape[2]
-    config['valid_type'] = 'validComplete'  #return to original state
     if config['valid_type'] == "split":
         net = DeepConvLSTM_regression(config=config)
         loss = torch.nn.MSELoss()
@@ -141,8 +164,8 @@ def main_regression():
         modelName = "model_regression20221228162517.pth"
         validation_regression(modelName, X_valid_ss, y_valid_ss, x_mm, y_mm)
     elif config['valid_type'] == 'validComplete':
-        modelName = "model_regression20221228162517.pth"
-        validation_regressionComplete(modelName, X_valid_ss, y_valid_ss, x_mm_, y_mm_)
+        modelName = "model_regression20221228172827.pth"
+        validation_regressionComplete(modelName, X_valid_ss, y_valid_ss, x_mm_, y_mm_)  #scalers used in training
 
 if __name__ == "__main__":
     if config['DL_mode'] == 'classification':

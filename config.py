@@ -23,6 +23,7 @@ config = {
     'valid_type': 'validComplete', #split   #trainValidSimply #other
     'DL_mode': 'regression', # 'regression, 'classification'
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
+    'window_type': 'window2', # check the type of window in the main regression script
     'valid_epoch':'best',
     'no_lstm': False,
     'batch_norm': False,
@@ -33,7 +34,7 @@ config = {
     'reduce_layer': False,
     'reduce_layer_output': 10,
     'nb_classes': 7,
-    'seed': 5, #was seed 1
+    'seed': 2, #was seed 1
     'gpu': 'cuda:0',
     'verbose': False,
     'print_freq': 10,
