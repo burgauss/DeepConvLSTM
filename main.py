@@ -155,10 +155,13 @@ def main_regression():
         net = DeepConvLSTM_regression(config=config)
         loss = torch.nn.MSELoss()
         opt = torch.optim.Adam(net.parameters(), lr=config['lr'], weight_decay=config["weight_decay"])
-        trained_net, checkpoint, val_output, train_output, best_fp, best_fn, best_precision, counter  = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train_ss,
+        trained_net, checkpoint, val_output, train_output, best_fp, \
+        best_fn, best_precision, counter, train_losses, val_losses  = train_valid_split(x_train_set = X_train_ss, y_train_set = y_train_ss,
              x_valid_set = X_valid_ss, y_valid_set = y_valid_ss, custom_net=net, custom_loss=loss, custom_opt=opt, y_scaler=y_mm)
-        print("final_valoutput")
-        print(val_output)
+        print("train_losses: ")
+        print(train_losses)
+        print("val_losses: ")
+        print(val_losses)
         torch.save(trained_net.state_dict(), './model_regression'+ log_date + log_timestamp +'.pth')
     elif config['valid_type'] == 'validNotSimplyRegression':
         modelName = "model_regression20221228162517.pth"

@@ -703,9 +703,9 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
     # counters and objects used for early stopping and learning rate adjustment
     best_metric = float("inf")
     best_network = None
-    best_val_losses = None
-    best_train_losses = None
-    best_val_preds = None
+    val_losses = None
+    train_losses_epoch = []
+    val_losses_epoch = []
     best_train_preds = None
     early_stop = False
     es_pt_counter = 0
@@ -721,7 +721,7 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
         train_gt = []
         train_losses = []
         start_time = time.time()
-        batch_num = 1
+        batch_num = 0
 
         # iterate over train dataset
         for i, (x, y) in enumerate(trainloader):
@@ -754,11 +754,11 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                         'train loss {:5.5f}'.format(e, batch_num, elapsed * 1000 / config['batch_size'], cur_loss))
                 start_time = time.time()
             batch_num += 1
-            
             # plot gradient flow if wanted
             if config['save_gradient_plot']:
                 plot_grad_flow(network)
-
+        
+        train_losses_epoch.append(np.mean(train_losses))  # save the epoch mean of train_loss
         """
         VALIDATION
         """
@@ -796,8 +796,9 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
                 y_true = targets.cpu().numpy().flatten()
                 val_preds = np.concatenate((np.array(val_preds, float), np.array(y_preds, float)))
                 val_gt = np.concatenate((np.array(val_gt, float), np.array(y_true, float)))
-
-
+                
+        val_losses_epoch.append(np.mean(val_losses)) # Calculate the loss in the validation set per the 10 epochs
+        #print("validation loss: ", cur_val_loss)
         # employ early stopping if employed
         # metric = f1_score(val_gt, val_preds, average='macro')
         metric_scaled = mean_squared_error(val_gt, val_preds)
@@ -890,7 +891,7 @@ def train_regression(train_features, train_labels, val_features, val_labels, net
     if config['valid_epoch'] == 'best':
         return best_network, checkpoint, np.vstack((best_val_preds, val_gt_un)).T, \
                np.vstack((best_train_preds, train_gt_un)).T, best_fp, best_fn, best_precision, \
-            best_elementCounter
+            best_elementCounter, train_losses_epoch, val_losses_epoch
     else:   
         checkpoint = {
             "model_state_dict": network.state_dict(),
