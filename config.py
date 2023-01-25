@@ -20,10 +20,10 @@ config = {
     'lr': 1e-4,
     'weight_decay': 1e-6,
     'shuffling': True,
-    'valid_type': 'split', #split   #trainValidSimply #other
+    'valid_type': 'validNotSimplyRegression', #split   #trainValidSimply #other
     'DL_mode': 'regression', # 'regression, 'classification'
     ### UP FROM HERE YOU SHOULD RATHER NOT CHANGE THESE ####
-    'window_type': 'window3', # check the type of window in the main regression script
+    'window_type': 'window1', # check the type of window in the main regression script
     'valid_epoch':'best',
     'no_lstm': False,
     'batch_norm': False,

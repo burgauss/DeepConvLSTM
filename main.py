@@ -114,7 +114,7 @@ def main_regression():
             config['valid_type'] = 'validComplete'  #return to original state
             X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1OFF, indexes_LS2ON, 
                             tStepLeftShift=0, tStepRightShift=15, testSizePerc=0.4)
-    elif config['valid_type'] == 'split':
+    elif config['valid_type'] == 'split' or config['valid_type'] == 'validNotSimplyRegression':
         if config['window_type'] == 'window1':
             #Train for LS1ON + 45 points window
             X_train, X_valid, y_train, y_valid = getWindowedSplitData(dataset_pd, indexes_LS1ON, indexes_LS2ON, 
